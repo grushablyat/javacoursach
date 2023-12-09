@@ -17,7 +17,7 @@ public class RequestServlet extends HttpServlet {
         RequestDBService requestDB = new RequestDBService();
         String path = req.getPathInfo();
 
-        if (path == null || path.isEmpty()) {
+        if (path == null || path.isEmpty() || "/".equals(path)) {
             List<Request> requests = requestDB.getAll();
             if (requests != null) {
                 req.setAttribute("requests", requests);

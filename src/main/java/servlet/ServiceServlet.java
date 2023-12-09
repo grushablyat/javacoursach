@@ -17,7 +17,7 @@ public class ServiceServlet extends HttpServlet {
         ServiceDBService serviceDB = new ServiceDBService();
         String path = req.getPathInfo();
 
-        if (path == null || path.isEmpty()) {
+        if (path == null || path.isEmpty() || "/".equals(path)) {
             List<Service> services = serviceDB.getAll();
             if (services != null) {
                 req.setAttribute("services", services);
