@@ -1,0 +1,42 @@
+client:
+	create request
+
+master:
+	view
+	change status
+	create comment
+
+admin:
+	change request
+	view
+	set master
+
+
+entities:
+	user
+	service
+
+
+tables:
+	service:
+		id
+		client_id
+		date
+		description
+		status
+	user:
+		id
+		login
+		password
+		role
+	master_service:
+		service_id
+		master_id
+		...
+	comment:
+		id
+		master_service_id
+		text
+	status: (static)
+		id
+		name
