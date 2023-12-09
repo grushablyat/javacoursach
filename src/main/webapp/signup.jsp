@@ -45,7 +45,7 @@
     <input type="submit" name="signup" value="Sign Up">
 
     <span class="logged-or-not">Already have an</span>
-    <span class="logged-or-not" style="margin-top: 3px;">account? <a href="/login.jsp">Log In</a>!</span>
+    <span class="logged-or-not" style="margin-top: 3px;">account? <a href="/login">Log In</a>!</span>
 </form>
 </body>
 </html>
