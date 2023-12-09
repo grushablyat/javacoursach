@@ -17,7 +17,7 @@ public class UserServlet extends HttpServlet {
         UserDBService userDB = new UserDBService();
         String path = req.getPathInfo();
 
-        if (path == null || path.isEmpty()) {
+        if (path == null || path.isEmpty() || "/".equals(path)) {
             List<User> users = userDB.getAll();
             if (users != null) {
                 req.setAttribute("users", users);

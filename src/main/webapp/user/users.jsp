@@ -29,7 +29,7 @@
                     <th>Name</th>
                     <th>E-mail</th>
                     <th>Login</th>
-                    <th>Password</th>
+                    <th>Password Hash</th>
                     <th>Role</th>
                 </tr>
             </thead>

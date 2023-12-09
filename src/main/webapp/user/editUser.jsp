@@ -27,23 +27,31 @@
             <table>
                     <tr>
                         <td>Name</td>
-                        <td><input type="text" name="name" value="${user.name}" pattern="^[A-Z]{1}[a-z]{0,} [A-Z]{1}[a-z]{0,}$"
-                                   title="Name contains two words beginning with uppercase letters" required></td>
+                        <td><input type="text" name="name" value="${user.name}"
+                                   pattern="^[A-Z]{1}[a-z]{0,} [A-Z]{1}[a-z]{0,}$"
+                                   title="Name contains two words beginning with uppercase letters"
+                                   required></td>
                     </tr>
                     <tr>
                         <td>E-mail</td>
-                        <td><input type="email" name="email" value="${user.email}" pattern="^[a-z]{1,}[a-z0-9.]{0,}[a-z0-9]{1,}@[a-z]{1,}[a-z0-9]{0,}\.[a-z]{1,}$"
-                                   title="E-mail is a sequence of letters, digits and points separated by @" required></td>
+                        <td><input type="email" name="email" value="${user.email}"
+                                   pattern="^[a-z]{1,}[a-z0-9.]{0,}[a-z0-9]{1,}@[a-z]{1,}[a-z0-9]{0,}\.[a-z]{1,}$"
+                                   title="E-mail is a sequence of letters, digits and points separated by @"
+                                   required></td>
                     </tr>
                     <tr>
                         <td>Login</td>
-                        <td><input type="text" name="login" value="${user.login}" pattern="^[a-zA-Z0-9_]{1,}$"
-                                   title="Login is a sequence of letters, digits and underscore symbols" required></td>
+                        <td><input type="text" name="login" value="${user.login}"
+                                   pattern="^[a-zA-Z0-9_]{1,}$"
+                                   title="Login is a sequence of letters, digits and underscore symbols"
+                                   required></td>
                     </tr>
                     <tr>
                         <td>Role</td>
-                        <td><input type="number" name="role" value="${user.role}" min="1"
-                                   title="Role is a positive number..." required></td>
+                        <td><input type="number" name="role" value="${user.role}"
+                                   min="1"
+                                   title="Role is a positive number (ID of a role)"
+                                   required></td>
                     </tr>
             </table>
             <input type="submit" name="edit" value="Save changes">

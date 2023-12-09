@@ -83,6 +83,8 @@ public class UserDBService {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
+        } catch (NullPointerException e) {
+            ;
         }
 
         String sql = "INSERT INTO users(name, email, login, password, role) values(\'"
@@ -117,7 +119,6 @@ public class UserDBService {
                 rs.updateString("name", user.getName());
                 rs.updateString("email", user.getEmail());
                 rs.updateString("login", user.getLogin());
-                rs.updateString("password", new HashService().hash(user.getPassword()));
                 rs.updateInt("role", user.getRole());
                 rs.updateRow();
             } else throw new SQLException();
