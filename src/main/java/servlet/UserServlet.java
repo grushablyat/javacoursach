@@ -24,12 +24,13 @@ public class UserServlet extends HttpServlet {
                 req.getRequestDispatcher("/user/users.jsp").forward(req, resp);
             }
         } else {
-            String [] pathList = path.split("/");
-            String userID = pathList[1];
-            switch (userID) {
-                case "new" -> {
-                    req.getRequestDispatcher("/user/addUser.jsp").forward(req, resp);
-                }
+            try {
+                String[] pathList = path.split("/");
+                String userID = pathList[1];
+                switch (userID) {
+                    case "new" -> {
+                        req.getRequestDispatcher("/user/addUser.jsp").forward(req, resp);
+                    }
 //                case "delete" -> {
 //                    req.setAttribute( "result", new UserDBService().delete(Integer.parseInt(pathList[2]))
 //                        ? "Record was successfully deleted!"
@@ -38,16 +39,20 @@ public class UserServlet extends HttpServlet {
 //                    req.getRequestDispatcher("/result.jsp").forward(req, resp);
 //                    return;
 //                }
-                default -> {
-                    User user = userDB.getByID(Integer.parseInt(userID));
-                    if (user != null) {
-                        req.setAttribute("user", user);
-                        req.getRequestDispatcher("/user/editUser.jsp").forward(req, resp);
-                    } else {
-                        resp.sendRedirect("/404");
-                        return;
+                    default -> {
+                        User user = userDB.getByID(Integer.parseInt(userID));
+                        if (user != null) {
+                            req.setAttribute("user", user);
+                            req.getRequestDispatcher("/user/editUser.jsp").forward(req, resp);
+                        } else {
+                            resp.sendRedirect("/404");
+                            return;
+                        }
                     }
                 }
+            } catch (Exception e) { // NumberFormatException
+                resp.sendRedirect("/404");
+                return;
             }
         }
 

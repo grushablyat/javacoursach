@@ -24,22 +24,27 @@ public class RequestServlet extends HttpServlet {
                 req.getRequestDispatcher("/request/requests.jsp").forward(req, resp);
             }
         } else {
-            String [] pathList = path.split("/");
-            String requestID = pathList[1];
-            switch (requestID) {
-                case "new" -> {
-                    req.getRequestDispatcher("/request/addRequest.jsp").forward(req, resp);
-                }
-                default -> {
-                    Request request = requestDB.getByID(Integer.parseInt(requestID));
-                    if (request != null) {
-                        req.setAttribute("request", request);
-                        req.getRequestDispatcher("/request/editRequest.jsp").forward(req, resp);
-                    } else {
-                        resp.sendRedirect("/404");
-                        return;
+            try {
+                String[] pathList = path.split("/");
+                String requestID = pathList[1];
+                switch (requestID) {
+                    case "new" -> {
+                        req.getRequestDispatcher("/request/addRequest.jsp").forward(req, resp);
+                    }
+                    default -> {
+                        Request request = requestDB.getByID(Integer.parseInt(requestID));
+                        if (request != null) {
+                            req.setAttribute("request", request);
+                            req.getRequestDispatcher("/request/editRequest.jsp").forward(req, resp);
+                        } else {
+                            resp.sendRedirect("/404");
+                            return;
+                        }
                     }
                 }
+            } catch (Exception e) { // NumberFormatException
+                resp.sendRedirect("/404");
+                return;
             }
         }
 
