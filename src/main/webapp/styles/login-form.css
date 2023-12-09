@@ -1,6 +1,6 @@
 *,
 *:before,
-*:after{
+*:after {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -8,7 +8,8 @@
 body {
     background: linear-gradient(to top right, white, #cbb7fd);
 }
-.background{
+
+.background {
     width: 430px;
     height: 520px;
     position: absolute;
@@ -16,30 +17,34 @@ body {
     left: 50%;
     top: 50%;
 }
-.background .shape{
+
+.background .shape {
     height: 200px;
     width: 200px;
     position: absolute;
     border-radius: 50%;
 }
-.shape:first-child{
+
+.shape:first-child {
     background: linear-gradient(
-            #6336b6,
-            #855fc5
+        #6336b6,
+        #855fc5
     );
     left: -80px;
     top: -80px;
 }
-.shape:last-child{
+
+.shape:last-child {
     background: linear-gradient(
-            to right,
-            #40008f,
-            #6336b6
+        to right,
+        #40008f,
+        #6336b6
     );
     right: -30px;
     bottom: -80px;
 }
-form{
+
+form {
     height: 520px;
     width: 400px;
     background-color: rgba(255,255,255,0.13);
@@ -53,41 +58,48 @@ form{
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
     padding: 50px 35px;
 }
-form *{
+
+form * {
     font-family: 'Poppins',sans-serif;
     color: #000000;
     letter-spacing: 0.5px;
     outline: none;
     border: none;
 }
-form h3{
+
+form h3 {
     font-size: 32px;
     font-weight: 500;
     line-height: 42px;
     text-align: center;
 }
 
-label{
+label {
     display: block;
     margin-top: 30px;
     font-size: 16px;
     font-weight: 500;
 }
-input{
+
+input[type=text],
+input[type=email],
+input[type=password] {
     display: block;
     height: 50px;
     width: 100%;
-    background-color: rgb(234, 229, 241);
+    background-color: rgb(232, 227, 255);
     border-radius: 3px;
     padding: 0 10px;
     margin-top: 8px;
     font-size: 14px;
     font-weight: 300;
 }
-::placeholder{
+
+::placeholder {
     color: #000000;
 }
-button{
+
+input[type=submit] {
     margin-top: 50px;
     width: 100%;
     background-color: #892bcb;
@@ -98,25 +110,9 @@ button{
     border-radius: 5px;
     cursor: pointer;
 }
-.social{
-    margin-top: 30px;
-    display: flex;
-}
-.social div{
-    background: red;
-    width: 150px;
-    border-radius: 3px;
-    padding: 5px 10px 10px 5px;
-    background-color: rgba(255,255,255,0.27);
-    color: #000000;
-    text-align: center;
-}
-.social div:hover{
-    background-color: rgba(255,255,255,0.47);
-}
-.social .fb{
-    margin-left: 25px;
-}
-.social i{
-    margin-right: 4px;
+
+.logged-or-not {
+    display: block;
+    margin: 20px auto 0 auto;
+    color : black;
 }

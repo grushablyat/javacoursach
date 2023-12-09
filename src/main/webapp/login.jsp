@@ -14,16 +14,20 @@
     <div class="shape"></div>
     <div class="shape"></div>
 </div>
-<form>
+<form method="post">
     <h3>Login Here</h3>
 
     <label for="username">Username</label>
-    <input type="text" placeholder="Email or Phone" id="username">
+    <input type="text" placeholder="Username" id="username">
 
     <label for="password">Password</label>
     <input type="password" placeholder="Password" id="password">
 
-    <button>Log In</button>
+<%--    <button>Log In</button>--%>
+    <input type="submit" name="login" value="Log In">
+
+    <span class="logged-or-not">Do not have an</span>
+    <span class="logged-or-not" style="margin-top: 3px;">account yet? <a href="/signup.jsp">Sign In</a>!</span>
 </form>
 </body>
 </html>
