@@ -89,7 +89,7 @@ public class UserDBService {
             + user.getName() + "\', \'"
             + user.getEmail() + "\', \'"
             + user.getLogin() + "\', \'"
-            + user.getPassword() + "\', "
+            + new HashService().hash(user.getPassword()) + "\', "
             + user.getRole()
             + ")";
 
@@ -117,7 +117,7 @@ public class UserDBService {
                 rs.updateString("name", user.getName());
                 rs.updateString("email", user.getEmail());
                 rs.updateString("login", user.getLogin());
-                rs.updateString("password", user.getPassword());
+                rs.updateString("password", new HashService().hash(user.getPassword()));
                 rs.updateInt("role", user.getRole());
                 rs.updateRow();
             } else throw new SQLException();

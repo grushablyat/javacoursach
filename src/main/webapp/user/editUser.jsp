@@ -31,7 +31,7 @@
                                    title="Name contains two words beginning with uppercase letters" required></td>
                     </tr>
                     <tr>
-                        <td>E-Mail</td>
+                        <td>E-mail</td>
                         <td><input type="email" name="email" value="${user.email}" pattern="^[a-z]{1,}[a-z0-9.]{0,}[a-z0-9]{1,}@[a-z]{1,}[a-z0-9]{0,}\.[a-z]{1,}$"
                                    title="E-mail is a sequence of letters, digits and points separated by @" required></td>
                     </tr>
@@ -39,11 +39,6 @@
                         <td>Login</td>
                         <td><input type="text" name="login" value="${user.login}" pattern="^[a-zA-Z0-9_]{1,}$"
                                    title="Login is a sequence of letters, digits and underscore symbols" required></td>
-                    </tr>
-                    <tr>
-                        <td>Password</td>
-                        <td><input type="password" name="password" value="${user.password}" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&-_])[A-Za-z\d@$!%*#?&-_]{8,}$"
-                                   title="Password must contain minimum eight characters, at least one letter, one number and one special character" required></td>
                     </tr>
                     <tr>
                         <td>Role</td>
