@@ -25,7 +25,6 @@
     <label for="password">Password</label>
     <input type="password" placeholder="Password" id="password" name="password">
 
-<%--    <button>Log In</button>--%>
     <input type="submit" name="loginButton" value="Log In">
 
     <span class="logged-or-not">Do not have an</span>

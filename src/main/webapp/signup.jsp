@@ -42,7 +42,6 @@
            title="Password must contain minimum eight characters, at least one letter, one number and one special character"
            required>
 
-<%--    <button>Sign Up</button>--%>
     <input type="submit" name="signupButton" value="Sign Up">
 
     <span class="logged-or-not">Already have an</span>

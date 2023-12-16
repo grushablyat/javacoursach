@@ -14,7 +14,7 @@ import java.io.IOException;
 public class SignupServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("signUpResult", "");
+        req.setAttribute("signUpResult", "Enter information about you");
         req.getRequestDispatcher("/signup.jsp").forward(req, resp);
         resp.setContentType("text/html");
         super.doGet(req, resp);

@@ -14,7 +14,7 @@ import java.io.IOException;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute("logInResult", "");
+        req.setAttribute("logInResult", "Enter username and password");
         req.getRequestDispatcher("/login.jsp").forward(req, resp);
         resp.setContentType("text/html");
         super.doGet(req, resp);
