@@ -43,7 +43,5 @@ public class LoginServlet extends HttpServlet {
             resp.setContentType("text/html");
             super.doPost(req, resp);
         }
-
-//        super.doPost(req, resp);
     }
 }

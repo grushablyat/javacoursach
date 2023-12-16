@@ -58,7 +58,7 @@ public class ServiceServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         String path = req.getPathInfo();
 
-        if (path == null || path.isEmpty()) {
+        if (path == null || path.isEmpty() || "/".equals(path)) {
             return;
         }
 
@@ -85,7 +85,6 @@ public class ServiceServlet extends HttpServlet {
                             : "Record was not edited, error occurred.";
                 }
                 if (req.getParameter("delete") != null) {
-//                    new UserDBService().delete(Integer.parseInt(userID));
                     result = (new ServiceDBService().delete(Integer.parseInt(serviceID)))
                             ? "Record was successfully deleted!"
                             : "Record was not deleted, error occurred.";
@@ -93,10 +92,8 @@ public class ServiceServlet extends HttpServlet {
             }
         }
 
-//        resp.sendRedirect("/users");
         req.setAttribute("result", result);
         req.setAttribute("table", "services");
         req.getRequestDispatcher("/result.jsp").forward(req, resp);
-//        super.doPost(req, resp);
     }
 }
