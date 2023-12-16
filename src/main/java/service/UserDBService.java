@@ -47,7 +47,7 @@ public class UserDBService {
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }
+        } catch (NullPointerException e) {}
 
         return user;
     }
@@ -56,7 +56,7 @@ public class UserDBService {
         User user = null;
 
         try {
-            ResultSet rs = new DBService().select("SELECT * FROM users WHERE login=" + login);
+            ResultSet rs = new DBService().select("SELECT * FROM users WHERE login=\'" + login + "\'");
             if (rs.next()) {
                 user = new User(
                         rs.getInt("id"),
@@ -69,22 +69,16 @@ public class UserDBService {
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }
+        } catch (NullPointerException e) {}
 
         return user;
     }
 
-    public boolean create(User user) {
-        try {
-            ResultSet rs = new DBService().select("SELECT login FROM users WHERE login=" + user.getLogin());
-            if (rs.next()) {
-                throw new SQLException("User with this login already exists");
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return false;
-        } catch (NullPointerException e) {
-            ;
+    public Integer create(User user) {
+        Integer id = null;
+
+        if (getByLogin(user.getLogin()) != null) {
+            return id;
         }
 
         String sql = "INSERT INTO users(name, email, login, password, role) values(\'"
@@ -95,7 +89,12 @@ public class UserDBService {
             + user.getRole()
             + ")";
 
-        return new DBService().insert(sql);
+
+        if (new DBService().insert(sql)) {
+            id = getByLogin(user.getLogin()).getId();
+        }
+
+        return id;
     }
 
     public boolean edit(int id, User user) {

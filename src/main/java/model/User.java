@@ -8,7 +8,29 @@ public class User {
     private String password;
     private int role;
 
-    public User(int id, String name, String email, String login, String password, String role) {}
+    public enum Role {
+        ADMIN(1),
+        MASTER(2),
+        CLIENT(3);
+
+        private final int role;
+
+        Role(int i) {
+            role = i;
+        }
+
+        int getRole() {
+            return role;
+        }
+    }
+
+    public User(String name, String email, String login, String password) {
+        this.name = name;
+        this.email = email;
+        this.login = login;
+        this.password = password;
+        this.role = Role.CLIENT.getRole();
+    }
 
     public User(int id, String name, String email, String login, String password, int role) {
         this.id = id;

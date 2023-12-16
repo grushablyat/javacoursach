@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,18 +17,19 @@
 </div>
 <form method="post">
     <h3>Login Here</h3>
+    <label>${logInResult}</label>
 
     <label for="username">Username</label>
-    <input type="text" placeholder="Username" id="username">
+    <input type="text" placeholder="Username" id="username" name="login">
 
     <label for="password">Password</label>
-    <input type="password" placeholder="Password" id="password">
+    <input type="password" placeholder="Password" id="password" name="password">
 
 <%--    <button>Log In</button>--%>
-    <input type="submit" name="login" value="Log In">
+    <input type="submit" name="loginButton" value="Log In">
 
     <span class="logged-or-not">Do not have an</span>
-    <span class="logged-or-not" style="margin-top: 3px;">account yet? <a href="/signup">Sign In</a>!</span>
+    <span class="logged-or-not" style="margin-top: 3px;">account yet? <a href="/signup">Sign Up</a>!</span>
 </form>
 </body>
 </html>

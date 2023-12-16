@@ -85,14 +85,14 @@ public class UserServlet extends HttpServlet {
             case "new" -> {
                 if (req.getParameter("add") != null && req.getParameter("cancel") == null) {
 //                    new UserDBService().create(user);
-                    result = (new UserDBService().create(new User(
+                    result = ((new UserDBService().create(new User(
                             0,
                             req.getParameter("name"),
                             req.getParameter("email"),
                             req.getParameter("login"),
                             req.getParameter("password"),
                             Integer.parseInt(req.getParameter("role"))
-                    )))
+                    ))) != null)
                             ? "Record was successfully added!"
                             : "Record was not added, error occurred.";
                 }
