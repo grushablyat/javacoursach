@@ -69,7 +69,6 @@ public class RequestServlet extends HttpServlet {
             case "new" -> {
                 if (req.getParameter("add") != null && req.getParameter("cancel") == null) {
                     result = (new RequestDBService().create(new Request(
-                            0,
                             Integer.parseInt(req.getParameter("client")),
                             Date.valueOf(req.getParameter("date")),
                             req.getParameter("description"),
@@ -82,7 +81,6 @@ public class RequestServlet extends HttpServlet {
             default -> {
                 if (req.getParameter("edit") != null) {
                     result = (new RequestDBService().edit(Integer.parseInt(requestID), new Request(
-                            0,
                             Integer.parseInt(req.getParameter("client")),
                             Date.valueOf(req.getParameter("date")),
                             req.getParameter("description"),

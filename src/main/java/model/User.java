@@ -8,7 +8,7 @@ public class User {
     private String password;
     private int role;
 
-    public enum Role {
+    private enum Role {
         ADMIN(1),
         MASTER(2),
         CLIENT(3);
@@ -24,21 +24,21 @@ public class User {
         }
     }
 
-    public User(String name, String email, String login, String password) {
-        this.name = name;
-        this.email = email;
-        this.login = login;
-        this.password = password;
-        this.role = Role.CLIENT.getRole();
-    }
-
-    public User(int id, String name, String email, String login, String password, int role) {
-        this.id = id;
+    public User(String name, String email, String login, String password, int role) {
         this.name = name;
         this.email = email;
         this.login = login;
         this.password = password;
         this.role = role;
+    }
+
+    public User(String name, String email, String login, String password) {
+        this(name, email, login, password, Role.CLIENT.getRole());
+    }
+
+    public User(int id, String name, String email, String login, String password, int role) {
+        this(name, email, login, password, role);
+        this.id = id;
     }
 
     public int getId() {

@@ -10,12 +10,16 @@ public class Request {
     private String description;
     private int status;
 
-    public Request(int id, int client, Date date, String description, int status) {
-        this.id = id;
+    public Request(int client, Date date, String description, int status) {
         this.client = client;
         this.date = date;
         this.description = description;
         this.status = status;
+    }
+
+    public Request(int id, int client, Date date, String description, int status) {
+        this(client, date, description, status);
+        this.id = id;
     }
 
     public int getId() {

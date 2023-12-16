@@ -5,10 +5,14 @@ public class Service {
     private int request;
     private int master;
 
-    public Service(int id, int request, int master) {
-        this.id = id;
+    public Service(int request, int master) {
         this.request = request;
         this.master = master;
+    }
+
+    public Service(int id, int request, int master) {
+        this(request, master);
+        this.id = id;
     }
 
     public int getId() {

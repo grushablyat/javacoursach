@@ -2,12 +2,12 @@ package model;
 
 public class Comment {
     private int id;
-    private int masterService;
+    private int service;
     private String text;
 
     public Comment(int id, int masterService, String text) {
         this.id = id;
-        this.masterService = masterService;
+        this.service = masterService;
         this.text = text;
     }
 
@@ -19,12 +19,12 @@ public class Comment {
         this.id = id;
     }
 
-    public int getMasterService() {
-        return masterService;
+    public int getService() {
+        return service;
     }
 
-    public void setMasterService(int masterService) {
-        this.masterService = masterService;
+    public void setService(int service) {
+        this.service = service;
     }
 
     public String getText() {

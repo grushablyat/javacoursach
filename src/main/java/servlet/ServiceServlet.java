@@ -68,7 +68,6 @@ public class ServiceServlet extends HttpServlet {
             case "new" -> {
                 if (req.getParameter("add") != null && req.getParameter("cancel") == null) {
                     result = (new ServiceDBService().create(new Service(
-                            0,
                             Integer.parseInt(req.getParameter("request")),
                             Integer.parseInt(req.getParameter("master"))
                     )))
@@ -79,7 +78,6 @@ public class ServiceServlet extends HttpServlet {
             default -> {
                 if (req.getParameter("edit") != null) {
                     result = (new ServiceDBService().edit(Integer.parseInt(serviceID), new Service(
-                            0,
                             Integer.parseInt(req.getParameter("request")),
                             Integer.parseInt(req.getParameter("master"))
                     )))

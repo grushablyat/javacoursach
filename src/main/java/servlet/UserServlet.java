@@ -86,7 +86,6 @@ public class UserServlet extends HttpServlet {
                 if (req.getParameter("add") != null && req.getParameter("cancel") == null) {
 //                    new UserDBService().create(user);
                     result = ((new UserDBService().create(new User(
-                            0,
                             req.getParameter("name"),
                             req.getParameter("email"),
                             req.getParameter("login"),
@@ -101,7 +100,6 @@ public class UserServlet extends HttpServlet {
                 if (req.getParameter("edit") != null) {
 //                    new UserDBService().edit(Integer.parseInt(userID), user);
                     result = (new UserDBService().edit(Integer.parseInt(userID), new User(
-                            0,
                             req.getParameter("name"),
                             req.getParameter("email"),
                             req.getParameter("login"),
