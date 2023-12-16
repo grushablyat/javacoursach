@@ -17,17 +17,17 @@ public class UserDBService {
             ResultSet rs = dbs.select("SELECT * FROM users");
             while (rs.next()) {
                 users.add(new User(
-                    rs.getInt("id"),
-                    rs.getString("name"),
-                    rs.getString("email"),
-                    rs.getString("login"),
-                    rs.getString("password"),
-                    rs.getInt("role")
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("login"),
+                        rs.getString("password"),
+                        rs.getInt("role")
                 ));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }
+        } catch (NullPointerException e) {}
 
         return users;
     }
@@ -39,12 +39,12 @@ public class UserDBService {
             ResultSet rs = dbs.select("SELECT * FROM users WHERE id=" + id);
             if (rs.next()) {
                 user = new User(
-                    rs.getInt("id"),
-                    rs.getString("name"),
-                    rs.getString("email"),
-                    rs.getString("login"),
-                    rs.getString("password"),
-                    rs.getInt("role")
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("login"),
+                        rs.getString("password"),
+                        rs.getInt("role")
                 );
             }
         } catch (SQLException e) {
@@ -79,40 +79,33 @@ public class UserDBService {
     public Integer create(User user) {
         Integer id = null;
 
-        if (getByLogin(user.getLogin()) != null) {
-            return id;
-        }
+        if (getByLogin(user.getLogin()) == null) {
+            String sql = "INSERT INTO users(name, email, login, password, role) values(\'"
+                    + user.getName() + "\', \'"
+                    + user.getEmail() + "\', \'"
+                    + user.getLogin() + "\', \'"
+                    + new HashService().hash(user.getPassword()) + "\', "
+                    + user.getRole()
+                    + ")";
 
-        String sql = "INSERT INTO users(name, email, login, password, role) values(\'"
-            + user.getName() + "\', \'"
-            + user.getEmail() + "\', \'"
-            + user.getLogin() + "\', \'"
-            + new HashService().hash(user.getPassword()) + "\', "
-            + user.getRole()
-            + ")";
-
-
-        if (dbs.insert(sql)) {
-            id = getByLogin(user.getLogin()).getId();
+            if (dbs.insert(sql) && (user = getByLogin(user.getLogin())) != null) {
+                id = user.getId();
+            }
         }
 
         return id;
     }
 
     public boolean edit(int id, User user) {
-        boolean result = true;
-
         try {
             ResultSet rs = dbs.select("SELECT login FROM users WHERE id!=" + id + " AND login=\'" + user.getLogin() + "\'");
             if (rs.next()) {
-                throw new SQLException("User with this login already exists");
+                throw new SQLException("Username is already taken");
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
-        } catch (NullPointerException e) {
-            ;
-        }
+        } catch (NullPointerException e) {}
 
         try {
             ResultSet rs = dbs.select("SELECT * FROM users WHERE id=" + id);
@@ -126,9 +119,12 @@ public class UserDBService {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
+        } catch (NullPointerException e) {
+            System.out.println(e.getMessage());
+            return false;
         }
 
-        return result;
+        return true;
     }
 
     public boolean delete(int id) {

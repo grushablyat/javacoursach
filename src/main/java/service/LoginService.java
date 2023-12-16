@@ -7,7 +7,7 @@ public class LoginService {
         Integer id = null;
         User user = new UserDBService().getByLogin(login);
         if (user != null && user.getPassword().equals(new HashService().hash(password))) {
-            id = new UserDBService().getByLogin(login).getId();
+            id = user.getId();
         }
 
         return id;

@@ -1,9 +1,7 @@
 package service;
 
 import model.Request;
-import model.User;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,16 +17,16 @@ public class RequestDBService {
             ResultSet rs = dbs.select("SELECT * FROM request");
             while (rs.next()) {
                 requests.add(new Request(
-                    rs.getInt("id"),
-                    rs.getInt("client"),
-                    rs.getDate("request_date"),
-                    rs.getString("description"),
-                    rs.getInt("status")
+                        rs.getInt("id"),
+                        rs.getInt("client"),
+                        rs.getDate("request_date"),
+                        rs.getString("description"),
+                        rs.getInt("status")
                 ));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }
+        } catch (NullPointerException e) {}
 
         return requests;
     }
@@ -49,7 +47,7 @@ public class RequestDBService {
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }
+        } catch (NullPointerException e) {}
 
         return request;
     }
@@ -61,12 +59,11 @@ public class RequestDBService {
                 + request.getDescription() + "\', \'"
                 + request.getStatus()
                 + "\')";
+
         return dbs.insert(sql);
     }
 
     public boolean edit(int id, Request request) {
-        boolean result = true;
-
         try {
             ResultSet rs = dbs.select("SELECT * FROM request WHERE id=" + id);
             if (rs.next()) {
@@ -75,13 +72,17 @@ public class RequestDBService {
                 rs.updateString("description", request.getDescription());
                 rs.updateInt("status", request.getStatus());
                 rs.updateRow();
-            } else throw new SQLException();
+            } else {
+                throw new SQLException();
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
+        } catch (NullPointerException e) {
+            return false;
         }
 
-        return result;
+        return true;
     }
 
     public boolean delete(int id) {

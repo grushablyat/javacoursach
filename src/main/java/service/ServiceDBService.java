@@ -24,7 +24,8 @@ public class ServiceDBService {
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }
+        } catch (NullPointerException e) {}
+
         return services;
     }
 
@@ -42,7 +43,7 @@ public class ServiceDBService {
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }
+        } catch (NullPointerException e) {}
 
         return service;
     }
@@ -68,6 +69,8 @@ public class ServiceDBService {
             } else throw new SQLException();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            return false;
+        } catch (NullPointerException e) {
             return false;
         }
 
