@@ -23,33 +23,6 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
         <url-pattern>/signup</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>userServlet</servlet-name>
-        <servlet-class>servlet.UserServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>userServlet</servlet-name>
-        <url-pattern>/users/*</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>requestServlet</servlet-name>
-        <servlet-class>servlet.RequestServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>requestServlet</servlet-name>
-        <url-pattern>/requests/*</url-pattern>
-    </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>serviceServlet</servlet-name>
-        <servlet-class>servlet.ServiceServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>serviceServlet</servlet-name>
-        <url-pattern>/services/*</url-pattern>
-    </servlet-mapping>
-
     <error-page>
         <error-code>404</error-code>
         <location>/404.jsp</location>
