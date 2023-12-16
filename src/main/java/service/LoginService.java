@@ -13,11 +13,11 @@ public class LoginService {
         return id;
     }
 
-    public Integer signUp(User user) {
+    public Integer signUp(String name, String email, String login, String password) {
         Integer id = null;
         UserDBService udbs = new UserDBService();
 
-        id = udbs.create(user);
+        id = udbs.create(new User (name, email, login, password));
 
         return id;
     }

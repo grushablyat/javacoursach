@@ -8,11 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceDBService {
+    DBService dbs = new DBService();
+
     public List<Service> getAll() {
         List<Service> services = new ArrayList<>();
 
         try {
-            ResultSet rs = new DBService().select("SELECT * FROM service");
+            ResultSet rs = dbs.select("SELECT * FROM service");
             while (rs.next()) {
                 services.add(new Service(
                         rs.getInt("id"),
@@ -30,7 +32,7 @@ public class ServiceDBService {
         Service service = null;
 
         try {
-            ResultSet rs = new DBService().select("SELECT * FROM service WHERE id=" + id);
+            ResultSet rs = dbs.select("SELECT * FROM service WHERE id=" + id);
             if (rs.next()) {
                 service = new Service(
                         rs.getInt("id"),
@@ -51,14 +53,14 @@ public class ServiceDBService {
                 + service.getMaster()
                 + ")";
 
-        return new DBService().insert(sql);
+        return dbs.insert(sql);
     }
 
     public boolean edit(int id, Service service) {
         boolean result = true;
 
         try {
-            ResultSet rs = new DBService().select("SELECT * FROM service WHERE id=" + id);
+            ResultSet rs = dbs.select("SELECT * FROM service WHERE id=" + id);
             if (rs.next()) {
                 rs.updateInt("request", service.getRequest());
                 rs.updateInt("master", service.getMaster());
@@ -74,6 +76,6 @@ public class ServiceDBService {
 
     public boolean delete(int id) {
         String sql = "DELETE FROM service WHERE id=" + id;
-        return new DBService().delete(sql);
+        return dbs.delete(sql);
     }
 }

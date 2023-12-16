@@ -8,11 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDBService {
+    DBService dbs = new DBService();
+
     public List<User> getAll() {
         List<User> users = new ArrayList<>();
 
         try {
-            ResultSet rs = new DBService().select("SELECT * FROM users");
+            ResultSet rs = dbs.select("SELECT * FROM users");
             while (rs.next()) {
                 users.add(new User(
                     rs.getInt("id"),
@@ -34,7 +36,7 @@ public class UserDBService {
         User user = null;
 
         try {
-            ResultSet rs = new DBService().select("SELECT * FROM users WHERE id=" + id);
+            ResultSet rs = dbs.select("SELECT * FROM users WHERE id=" + id);
             if (rs.next()) {
                 user = new User(
                     rs.getInt("id"),
@@ -56,7 +58,7 @@ public class UserDBService {
         User user = null;
 
         try {
-            ResultSet rs = new DBService().select("SELECT * FROM users WHERE login=\'" + login + "\'");
+            ResultSet rs = dbs.select("SELECT * FROM users WHERE login=\'" + login + "\'");
             if (rs.next()) {
                 user = new User(
                         rs.getInt("id"),
@@ -90,7 +92,7 @@ public class UserDBService {
             + ")";
 
 
-        if (new DBService().insert(sql)) {
+        if (dbs.insert(sql)) {
             id = getByLogin(user.getLogin()).getId();
         }
 
@@ -101,7 +103,7 @@ public class UserDBService {
         boolean result = true;
 
         try {
-            ResultSet rs = new DBService().select("SELECT login FROM users WHERE id!=" + id + " AND login=\'" + user.getLogin() + "\'");
+            ResultSet rs = dbs.select("SELECT login FROM users WHERE id!=" + id + " AND login=\'" + user.getLogin() + "\'");
             if (rs.next()) {
                 throw new SQLException("User with this login already exists");
             }
@@ -113,7 +115,7 @@ public class UserDBService {
         }
 
         try {
-            ResultSet rs = new DBService().select("SELECT * FROM users WHERE id=" + id);
+            ResultSet rs = dbs.select("SELECT * FROM users WHERE id=" + id);
             if (rs.next()) {
                 rs.updateString("name", user.getName());
                 rs.updateString("email", user.getEmail());
@@ -131,6 +133,6 @@ public class UserDBService {
 
     public boolean delete(int id) {
         String sql = "DELETE FROM users WHERE id = " + id;
-        return new DBService().delete(sql);
+        return dbs.delete(sql);
     }
 }

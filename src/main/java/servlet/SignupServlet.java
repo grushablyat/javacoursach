@@ -35,7 +35,7 @@ public class SignupServlet extends HttpServlet {
             return;
         }
 
-        Integer id = new LoginService().signUp(new User(name, email, login, password));
+        Integer id = new LoginService().signUp(name, email, login, password);
         if (id != null) {
             if (req.getSession().getAttribute("session") != null) {
                 req.getSession().removeAttribute("session");

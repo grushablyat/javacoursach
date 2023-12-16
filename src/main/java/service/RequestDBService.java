@@ -10,11 +10,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RequestDBService {
+    DBService dbs = new DBService();
+
     public List<Request> getAll() {
         List<Request> requests = new ArrayList<>();
 
         try {
-            ResultSet rs = new DBService().select("SELECT * FROM request");
+            ResultSet rs = dbs.select("SELECT * FROM request");
             while (rs.next()) {
                 requests.add(new Request(
                     rs.getInt("id"),
@@ -35,7 +37,7 @@ public class RequestDBService {
         Request request = null;
 
         try {
-            ResultSet rs = new DBService().select("SELECT * FROM request WHERE id=" + id);
+            ResultSet rs = dbs.select("SELECT * FROM request WHERE id=" + id);
             if (rs.next()) {
                 request = new Request(
                         rs.getInt("id"),
@@ -59,14 +61,14 @@ public class RequestDBService {
                 + request.getDescription() + "\', \'"
                 + request.getStatus()
                 + "\')";
-        return new DBService().insert(sql);
+        return dbs.insert(sql);
     }
 
     public boolean edit(int id, Request request) {
         boolean result = true;
 
         try {
-            ResultSet rs = new DBService().select("SELECT * FROM request WHERE id=" + id);
+            ResultSet rs = dbs.select("SELECT * FROM request WHERE id=" + id);
             if (rs.next()) {
                 rs.updateInt("client", request.getClient());
                 rs.updateDate("request_date", request.getDate());
@@ -84,6 +86,6 @@ public class RequestDBService {
 
     public boolean delete(int id) {
         String sql = "DELETE FROM request WHERE id=" + id;
-        return new DBService().delete(sql);
+        return dbs.delete(sql);
     }
 }
