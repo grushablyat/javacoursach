@@ -18,7 +18,9 @@ public class SessionFilter implements Filter {
         if ("/login".equals(path)
                 || "/signup".equals(path)
                 || "/logout".equals(path)
-                || path.endsWith(".css")) {
+                || (path.startsWith("/styles/") && path.endsWith(".css"))
+                || (path.startsWith("/images/") && (path.endsWith(".png") || path.endsWith(".jpg")))
+        ) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
