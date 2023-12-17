@@ -31,19 +31,19 @@
                 <td><input type="number" name="client" min="1" value="1"
                            title="Client is a positive number (id of a user)" required></td>
             </tr>
-            <tr>
-                <td>Date</td>
-                <td><input type="date" name="date" required></td>
-            </tr>
+<%--            <tr>--%>
+<%--                <td>Date</td>--%>
+<%--                <td><input type="date" name="date" required></td>--%>
+<%--            </tr>--%>
             <tr>
                 <td>Description</td>
                 <td><input type="text" name="description" required></td>
             </tr>
-            <tr>
-                <td>Status</td>
-                <td><input type="number" name="status" min="1" value="1"
-                           title="Status is a positive number (is of a status)" required></td>
-            </tr>
+<%--            <tr>--%>
+<%--                <td>Status</td>--%>
+<%--                <td><input type="number" name="status" min="1" value="1"--%>
+<%--                           title="Status is a positive number (is of a status)" required></td>--%>
+<%--            </tr>--%>
         </table>
         <input type="submit" name="add" value="Add">
         <input type="button" onclick="window.location='http://localhost:8080/requests'" name="cancel" value="Cancel">

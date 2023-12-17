@@ -70,9 +70,9 @@ public class RequestServlet extends HttpServlet {
                 if (req.getParameter("add") != null && req.getParameter("cancel") == null) {
                     result = (new RequestDBService().create(new Request(
                             Integer.parseInt(req.getParameter("client")),
-                            Date.valueOf(req.getParameter("date")),
-                            req.getParameter("description"),
-                            Integer.parseInt(req.getParameter("status"))
+//                            Date.valueOf(req.getParameter("date")),
+                            req.getParameter("description")
+//                            ,Integer.parseInt(req.getParameter("status"))
                     )))
                             ? "Record was successfully added!"
                             : "Record was not added, error occurred.";

@@ -2,6 +2,7 @@ package model;
 
 import java.text.SimpleDateFormat;
 import java.sql.Date;
+import java.util.concurrent.locks.ReadWriteLock;
 
 public class Request {
     private int id;
@@ -10,11 +11,18 @@ public class Request {
     private String description;
     private int status;
 
-    public Request(int client, Date date, String description, int status) {
+    public Request(int client, String description) {
         this.client = client;
-        this.date = date;
         this.description = description;
+    }
+    public Request(int client, String description, int status) {
+        this(client, description);
         this.status = status;
+    }
+
+    public Request(int client, Date date, String description, int status) {
+        this(client, description, status);
+        this.date = date;
     }
 
     public Request(int id, int client, Date date, String description, int status) {

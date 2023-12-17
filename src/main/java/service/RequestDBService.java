@@ -53,12 +53,9 @@ public class RequestDBService {
     }
 
     public boolean create(Request request) {
-        String sql = "INSERT INTO request(client, request_date, description, status) values("
+        String sql = "INSERT INTO request(client, description) values("
                 + request.getClient() + ", \'"
-                + request.getDateString() + "\', \'"
-                + request.getDescription() + "\', \'"
-                + request.getStatus()
-                + "\')";
+                + request.getDescription() + "\')";
 
         return dbs.insert(sql);
     }
@@ -68,8 +65,8 @@ public class RequestDBService {
             ResultSet rs = dbs.select("SELECT * FROM request WHERE id=" + id);
             if (rs.next()) {
                 rs.updateInt("client", request.getClient());
-                rs.updateDate("request_date", request.getDate());
                 rs.updateString("description", request.getDescription());
+                rs.updateDate("request_date", request.getDate());
                 rs.updateInt("status", request.getStatus());
                 rs.updateRow();
             } else {

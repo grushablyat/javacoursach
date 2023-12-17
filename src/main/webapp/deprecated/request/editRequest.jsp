@@ -28,20 +28,20 @@
         <table>
             <tr>
                 <td>Client</td>
-                <td><input type="number" min="1" value="${request.client}"
+                <td><input type="number" name="client" min="1" value="${request.client}"
                            title="Client is a positive number (id of a user)" required></td>
             </tr>
             <tr>
                 <td>Date</td>
-                <td><input type="date" value="${request.date}" required></td>
+                <td><input type="date" name="date" value="${request.date}" required></td>
             </tr>
             <tr>
                 <td>Description</td>
-                <td><input type="text" value="${request.description}" required></td>
+                <td><input type="text" name="description" value="${request.description}" required></td>
             </tr>
             <tr>
                 <td>Status</td>
-                <td><input type="number" value="${request.status}" min="1" required></td>
+                <td><input type="number" name="status" value="${request.status}" min="1" required></td>
             </tr>
         </table>
         <input type="submit" name="edit" value="Save changes">
