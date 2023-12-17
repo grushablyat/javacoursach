@@ -9,7 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.*;
 import java.io.IOException;
 import java.util.List;
 
@@ -40,13 +39,13 @@ public class UserServlet extends HttpServlet {
                             req.setAttribute("user", user);
                             req.getRequestDispatcher("/deprecated/user/editUser.jsp").forward(req, resp);
                         } else {
-                            resp.sendRedirect("/404");
+                            req.getRequestDispatcher("/404.jsp").forward(req, resp);
                             return;
                         }
                     }
                 }
             } catch (Exception e) { // NumberFormatException
-                resp.sendRedirect("/404");
+                req.getRequestDispatcher("/404.jsp").forward(req, resp);
                 return;
             }
         }

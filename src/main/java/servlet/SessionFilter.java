@@ -53,6 +53,9 @@ public class SessionFilter implements Filter {
                 case 3 -> {
                     if (path.startsWith("/client")) {
                         notFound = false;
+                    } else {
+                        req.getRequestDispatcher("/client-page/404.jsp").forward(req, resp);
+                        return;
                     }
                 }
                 default -> {
@@ -60,8 +63,9 @@ public class SessionFilter implements Filter {
             }
         }
 
+        // Delete when all types of users will have their own 404
         if (notFound) {
-            resp.sendRedirect("/404");
+            req.getRequestDispatcher("/404.jsp").forward(req, resp);
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
         }
