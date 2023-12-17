@@ -1,7 +1,7 @@
-package servlet;
+package servlet.deprecated;
 
-import model.User;
-import service.UserDBService;
+import model.Service;
+import service.ServiceDBService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,32 +11,32 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/users/*")
-public class UserServlet extends HttpServlet {
+@WebServlet("/services/*")
+public class ServiceServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserDBService userDB = new UserDBService();
+        ServiceDBService serviceDB = new ServiceDBService();
         String path = req.getPathInfo();
 
         if (path == null || path.isEmpty() || "/".equals(path)) {
-            List<User> users = userDB.getAll();
-            if (users != null) {
-                req.setAttribute("users", users);
-                req.getRequestDispatcher("/user/users.jsp").forward(req, resp);
+            List<Service> services = serviceDB.getAll();
+            if (services != null) {
+                req.setAttribute("services", services);
+                req.getRequestDispatcher("/deprecated/service/services.jsp").forward(req, resp);
             }
         } else {
             try {
                 String[] pathList = path.split("/");
-                String userID = pathList[1];
-                switch (userID) {
+                String serviceID = pathList[1];
+                switch (serviceID) {
                     case "new" -> {
-                        req.getRequestDispatcher("/user/addUser.jsp").forward(req, resp);
+                        req.getRequestDispatcher("/deprecated/service/addService.jsp").forward(req, resp);
                     }
                     default -> {
-                        User user = userDB.getByID(Integer.parseInt(userID));
-                        if (user != null) {
-                            req.setAttribute("user", user);
-                            req.getRequestDispatcher("/user/editUser.jsp").forward(req, resp);
+                        Service service = serviceDB.getByID(Integer.parseInt(serviceID));
+                        if (service != null) {
+                            req.setAttribute("service", service);
+                            req.getRequestDispatcher("/deprecated/service/editService.jsp").forward(req, resp);
                         } else {
                             resp.sendRedirect("/404");
                             return;
@@ -58,40 +58,34 @@ public class UserServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         String path = req.getPathInfo();
 
-        if (path == null || path.isEmpty()) {
+        if (path == null || path.isEmpty() || "/".equals(path)) {
             return;
         }
 
         String result = "Nothing happened.";
-        String userID = path.split("/")[1];
-        switch (userID) {
+        String serviceID = path.split("/")[1];
+        switch (serviceID) {
             case "new" -> {
                 if (req.getParameter("add") != null && req.getParameter("cancel") == null) {
-                    result = ((new UserDBService().create(new User(
-                            req.getParameter("name"),
-                            req.getParameter("email"),
-                            req.getParameter("login"),
-                            req.getParameter("password"),
-                            Integer.parseInt(req.getParameter("role"))
-                    ))) != null)
+                    result = (new ServiceDBService().create(new Service(
+                            Integer.parseInt(req.getParameter("request")),
+                            Integer.parseInt(req.getParameter("master"))
+                    )))
                             ? "Record was successfully added!"
                             : "Record was not added, error occurred.";
                 }
             }
             default -> {
                 if (req.getParameter("edit") != null) {
-                    result = (new UserDBService().edit(Integer.parseInt(userID), new User(
-                            req.getParameter("name"),
-                            req.getParameter("email"),
-                            req.getParameter("login"),
-                            req.getParameter("password"),
-                            Integer.parseInt(req.getParameter("role"))
+                    result = (new ServiceDBService().edit(Integer.parseInt(serviceID), new Service(
+                            Integer.parseInt(req.getParameter("request")),
+                            Integer.parseInt(req.getParameter("master"))
                     )))
                             ? "Record was successfully edited!"
                             : "Record was not edited, error occurred.";
                 }
                 if (req.getParameter("delete") != null) {
-                    result = (new UserDBService().delete(Integer.parseInt(userID)))
+                    result = (new ServiceDBService().delete(Integer.parseInt(serviceID)))
                             ? "Record was successfully deleted!"
                             : "Record was not deleted, error occurred.";
                 }
@@ -99,7 +93,7 @@ public class UserServlet extends HttpServlet {
         }
 
         req.setAttribute("result", result);
-        req.setAttribute("table", "users");
-        req.getRequestDispatcher("/result.jsp").forward(req, resp);
+        req.setAttribute("table", "services");
+        req.getRequestDispatcher("/deprecated/result.jsp").forward(req, resp);
     }
 }

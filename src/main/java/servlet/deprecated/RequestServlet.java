@@ -1,4 +1,4 @@
-package servlet;
+package servlet.deprecated;
 
 import model.Request;
 import service.RequestDBService;
@@ -23,7 +23,7 @@ public class RequestServlet extends HttpServlet {
             List<Request> requests = requestDB.getAll();
             if (requests != null) {
                 req.setAttribute("requests", requests);
-                req.getRequestDispatcher("/request/requests.jsp").forward(req, resp);
+                req.getRequestDispatcher("/deprecated/request/requests.jsp").forward(req, resp);
             }
         } else {
             try {
@@ -31,13 +31,13 @@ public class RequestServlet extends HttpServlet {
                 String requestID = pathList[1];
                 switch (requestID) {
                     case "new" -> {
-                        req.getRequestDispatcher("/request/addRequest.jsp").forward(req, resp);
+                        req.getRequestDispatcher("/deprecated/request/addRequest.jsp").forward(req, resp);
                     }
                     default -> {
                         Request request = requestDB.getByID(Integer.parseInt(requestID));
                         if (request != null) {
                             req.setAttribute("request", request);
-                            req.getRequestDispatcher("/request/editRequest.jsp").forward(req, resp);
+                            req.getRequestDispatcher("/deprecated/request/editRequest.jsp").forward(req, resp);
                         } else {
                             resp.sendRedirect("/404");
                             return;
@@ -99,6 +99,6 @@ public class RequestServlet extends HttpServlet {
 
         req.setAttribute("result", result);
         req.setAttribute("table", "requests");
-        req.getRequestDispatcher("/result.jsp").forward(req, resp);
+        req.getRequestDispatcher("/deprecated/result.jsp").forward(req, resp);
     }
 }
