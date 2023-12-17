@@ -33,32 +33,37 @@ public class SessionFilter implements Filter {
             return;
         }
 
-        if (!path.isEmpty()
-                && !"/".equals(path)
-                && !"/404".equals(path)) {
+        boolean notFound = true;
+        if (path.isEmpty()
+                || "/".equals(path)
+                || "/404".equals(path)) {
+            notFound = false;
+        } else {
             switch ((int) session.getAttribute("role")) {
                 case 1 -> {
-                    if (!path.startsWith("/users")) {
-                        resp.sendRedirect("/404");
-                        return;
+                    if (path.startsWith("/users")) {
+                        notFound = false;
                     }
                 }
                 case 2 -> {
-                    if (!path.startsWith("/services")) {
-                        resp.sendRedirect("/404");
-                        return;
+                    if (path.startsWith("/services")) {
+                        notFound = false;
                     }
                 }
                 case 3 -> {
-                    if (!path.startsWith("/requests")) {
-                        resp.sendRedirect("/404");
-                        return;
+                    if (path.startsWith("/client")) {
+                        notFound = false;
                     }
                 }
-                default -> {}
+                default -> {
+                }
             }
         }
 
-        filterChain.doFilter(servletRequest, servletResponse);
+        if (notFound) {
+            resp.sendRedirect("/404");
+        } else {
+            filterChain.doFilter(servletRequest, servletResponse);
+        }
     }
 }

@@ -68,7 +68,12 @@ public class SignupServlet extends HttpServlet {
                 }
                 req.getSession().setAttribute("id", user.getId());
                 req.getSession().setAttribute("role", user.getRole());
-                resp.sendRedirect("/");
+                resp.sendRedirect(switch (user.getRole()) {
+                    case 1 -> "/admin";
+                    case 2 -> "/master";
+                    case 3 -> "/client";
+                    default -> "/logout";
+                });
                 return;
             } else {
                 req.setAttribute("signUpResult", "Username is already taken");

@@ -50,8 +50,14 @@ public class LoginServlet extends HttpServlet {
         if (user != null && user.getId() != null) {
             HttpSession session = req.getSession();
             session.setAttribute("id", user.getId());
-            session.setAttribute("role", user.getRole());
-            resp.sendRedirect("/");
+            int role = user.getRole();
+            session.setAttribute("role", role);
+            resp.sendRedirect(switch (role) {
+                case 1 -> "/admin";
+                case 2 -> "/master";
+                case 3 -> "/client";
+                default -> "/logout";
+            });
         } else {
             req.setAttribute("logInResult", "Incorrect username or password");
             req.getRequestDispatcher("/login.jsp").forward(req, resp);
