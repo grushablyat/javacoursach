@@ -1,6 +1,5 @@
 package servlet;
 
-import model.Role;
 import model.User;
 import service.LoginService;
 
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/signup")
 public class SignupServlet extends HttpServlet {
@@ -59,13 +57,17 @@ public class SignupServlet extends HttpServlet {
         }
 
         if (correctKeyword) {
-            Integer id = ls.signUp(name, email, login, password, role);
+            User user = ls.signUp(name, email, login, password, role);
 
-            if (id != null) {
-                if (req.getSession().getAttribute("session") != null) {
-                    req.getSession().removeAttribute("session");
+            if (user != null && user.getId() != null) {
+                if (req.getSession().getAttribute("id") != null) {
+                    req.getSession().removeAttribute("id");
                 }
-                req.getSession().setAttribute("session", id);
+                if (req.getSession().getAttribute("role") != null) {
+                    req.getSession().removeAttribute("role");
+                }
+                req.getSession().setAttribute("id", user.getId());
+                req.getSession().setAttribute("role", user.getRole());
                 resp.sendRedirect("/");
                 return;
             } else {

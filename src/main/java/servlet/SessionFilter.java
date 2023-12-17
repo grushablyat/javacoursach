@@ -14,15 +14,47 @@ public class SessionFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
         String path = req.getRequestURI();
-        if (path.equals("/login") || path.equals("/signup")) {
+
+        if ("/login".equals(path)
+                || "/signup".equals(path)
+                || "/logout".equals(path)
+                || path.endsWith(".css")) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
 
         HttpSession session = req.getSession(false);
-        if (session == null || session.getAttribute("session") == null) {
+        if (session == null
+                || session.getAttribute("id") == null
+                || session.getAttribute("role") == null) {
             resp.sendRedirect("/login");
             return;
+        }
+
+        if (!path.isEmpty()
+                && !"/".equals(path)
+                && !"/404".equals(path)) {
+            switch ((int) session.getAttribute("role")) {
+                case 1 -> {
+                    if (!path.startsWith("/users")) {
+                        resp.sendRedirect("/404");
+                        return;
+                    }
+                }
+                case 2 -> {
+                    if (!path.startsWith("/services")) {
+                        resp.sendRedirect("/404");
+                        return;
+                    }
+                }
+                case 3 -> {
+                    if (!path.startsWith("/requests")) {
+                        resp.sendRedirect("/404");
+                        return;
+                    }
+                }
+                default -> {}
+            }
         }
 
         filterChain.doFilter(servletRequest, servletResponse);

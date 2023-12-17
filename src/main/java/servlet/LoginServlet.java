@@ -1,5 +1,6 @@
 package servlet;
 
+import model.User;
 import service.LoginService;
 
 import javax.servlet.ServletException;
@@ -18,8 +19,11 @@ public class LoginServlet extends HttpServlet {
 
         if ("/logout".equals(uri)) {
             HttpSession session = req.getSession();
-            if (session != null && session.getAttribute("session") != null) {
-                session.removeAttribute("session");
+            if (session != null && session.getAttribute("id") != null) {
+                session.removeAttribute("id");
+            }
+            if (session != null && session.getAttribute("role") != null) {
+                session.removeAttribute("role");
             }
         }
 
@@ -42,9 +46,11 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
-        Integer id = new LoginService().logIn(login, password);
-        if (id != null) {
-            req.getSession().setAttribute("session", id);
+        User user = new LoginService().logIn(login, password);
+        if (user != null && user.getId() != null) {
+            HttpSession session = req.getSession();
+            session.setAttribute("id", user.getId());
+            session.setAttribute("role", user.getRole());
             resp.sendRedirect("/");
         } else {
             req.setAttribute("logInResult", "Incorrect username or password");

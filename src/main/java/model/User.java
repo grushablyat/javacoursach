@@ -1,7 +1,7 @@
 package model;
 
 public class User {
-    private int id;
+    private Integer id;
     private String name;
     private String email;
     private String login;
@@ -24,6 +24,13 @@ public class User {
         }
     }
 
+    public User() {}
+
+    public User(int id, int role) {
+        this.id = id;
+        this.role = role;
+    }
+
     public User(String name, String email, String login, String password, int role) {
         this.name = name;
         this.email = email;
@@ -41,7 +48,7 @@ public class User {
         this.id = id;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
