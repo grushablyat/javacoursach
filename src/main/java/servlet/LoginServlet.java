@@ -1,6 +1,5 @@
 package servlet;
 
-import service.HashService;
 import service.LoginService;
 
 import javax.servlet.ServletException;
@@ -8,12 +7,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/login")
+@WebServlet(urlPatterns = {"/login", "/logout"})
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String uri = req.getRequestURI();
+
+        if ("/logout".equals(uri)) {
+            HttpSession session = req.getSession();
+            if (session != null && session.getAttribute("session") != null) {
+                session.removeAttribute("session");
+            }
+        }
+
         req.setAttribute("logInResult", "Enter username and password");
         req.getRequestDispatcher("/login.jsp").forward(req, resp);
         resp.setContentType("text/html");

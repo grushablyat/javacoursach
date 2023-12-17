@@ -3,21 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../styles/style.css">
-    <script type="text/javascript" src="../scripts/userValidation.js"></script>
+    <link rel="stylesheet" type="text/css" href="/styles/style.css">
     <title>Edit user</title>
 </head>
 <body>
     <header>
-        <img src="../images/whitelogo.jpg">
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/users">Users</a></li>
-                <li><a href="/requests">Requests</a></li>
-                <li><a href="/services">Services</a></li>
-            </ul>
-        </nav>
+        <div class="logolist">
+            <img class="logo" src="/images/whitelogo.jpg">
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/users">Users</a></li>
+                    <li><a href="/requests">Requests</a></li>
+                    <li><a href="/services">Services</a></li>
+                </ul>
+            </nav>
+        </div>
+        <a href="/logout"><img class="logout" src="/images/logout.png" alt="Log Out"></a>
     </header>
 
     <div>

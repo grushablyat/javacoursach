@@ -8,15 +8,18 @@
 </head>
 <body>
     <header>
-        <img src="/images/whitelogo.jpg">
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/users">Users</a></li>
-                <li><a href="/requests">Requests</a></li>
-                <li><a href="/services">Services</a></li>
-            </ul>
-        </nav>
+        <div class="logolist">
+            <img class="logo" src="/images/whitelogo.jpg">
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/users">Users</a></li>
+                    <li><a href="/requests">Requests</a></li>
+                    <li><a href="/services">Services</a></li>
+                </ul>
+            </nav>
+        </div>
+        <a href="/logout"><img class="logout" src="/images/logout.png" alt="Log Out"></a>
     </header>
 
     <p>${result}</p>
