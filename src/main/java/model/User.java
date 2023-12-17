@@ -8,7 +8,7 @@ public class User {
     private String password;
     private int role;
 
-    private enum Role {
+    public enum Role {
         ADMIN(1),
         MASTER(2),
         CLIENT(3);
@@ -19,7 +19,7 @@ public class User {
             role = i;
         }
 
-        int getRole() {
+        public int getRole() {
             return role;
         }
     }

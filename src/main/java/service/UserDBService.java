@@ -84,7 +84,7 @@ public class UserDBService {
                     + user.getName() + "\', \'"
                     + user.getEmail() + "\', \'"
                     + user.getLogin() + "\', \'"
-                    + new HashService().hash(user.getPassword()) + "\', "
+                    + user.getPassword() + "\', "
                     + user.getRole()
                     + ")";
 

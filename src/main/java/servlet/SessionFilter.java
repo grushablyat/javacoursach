@@ -25,13 +25,6 @@ public class SessionFilter implements Filter {
             return;
         }
 
-//        if (session == null || session.getAttribute("session") == null ||
-//                (new UserDBService().getByID(Integer.parseInt(
-//                        String.valueOf(session.getAttribute("session"))))) == null) {
-//            resp.sendRedirect("/login");
-//            return;
-//        }
-
         filterChain.doFilter(servletRequest, servletResponse);
     }
 }

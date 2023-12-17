@@ -42,6 +42,17 @@
            title="Password must contain minimum eight characters, at least one letter, one number and one special character"
            required>
 
+    <label for="role">Role</label>
+    <select name="role" id="role" required>
+        <option value="0" disabled selected>--Choose a role--
+        <option value="3">Client
+        <option value="2">Master
+        <option value="1">Admin
+    </select>
+
+    <label for="keyword">Keyword</label>
+    <input type="password" placeholder="Keyword" id="keyword" name="keyword">
+
     <input type="submit" name="signupButton" value="Sign Up">
 
     <span class="logged-or-not">Already have an</span>
