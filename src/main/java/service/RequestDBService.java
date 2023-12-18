@@ -1,6 +1,7 @@
 package service;
 
 import model.Request;
+import model.RequestExtended;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,6 +32,57 @@ public class RequestDBService {
         return requests;
     }
 
+    public List<RequestExtended> getAllExtended() {
+        List<RequestExtended> requests = new ArrayList<>();
+
+        try {
+            ResultSet rs = dbs.select(
+                    "SELECT r.*, s.name as statusName, u.name as clientName " +
+                            "FROM request r " +
+                            "JOIN status s ON r.status=s.id " +
+                            "JOIN users u ON r.client=u.id");
+            while (rs.next()) {
+                requests.add(new RequestExtended(
+                        rs.getInt("id"),
+                        rs.getInt("client"),
+                        rs.getDate("request_date"),
+                        rs.getString("description"),
+                        rs.getInt("status"),
+                        rs.getString("statusName"),
+                        rs.getString("clientName")
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (NullPointerException e) {}
+
+        return requests;
+    }
+
+    public List<RequestExtended> getByClient(int client) {
+        List<RequestExtended> requests = new ArrayList<>();
+
+        try {
+            ResultSet rs = dbs.select(
+                    "SELECT r.*, s.name as statusName " +
+                            "FROM request r " +
+                            "JOIN status s ON r.status=s.id " +
+                            "WHERE r.client=" + client);
+            while (rs.next()) {
+                requests.add(new RequestExtended(
+                        rs.getInt("id"),
+                        rs.getDate("request_date"),
+                        rs.getString("description"),
+                        rs.getString("statusName")
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (NullPointerException e) {}
+
+        return requests;
+    }
+
     public Request getByID(int id) {
         Request request = null;
 
@@ -43,6 +95,34 @@ public class RequestDBService {
                         rs.getDate("request_date"),
                         rs.getString("description"),
                         rs.getInt("status")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (NullPointerException e) {}
+
+        return request;
+    }
+
+    public RequestExtended getForClientByID(int id) {
+        RequestExtended request = null;
+
+        try {
+            ResultSet rs = dbs.select(
+                    "SELECT r.*, s.name as statusName, u.name as clientName "+
+                            "FROM request r "+
+                            "JOIN status s ON r.status=s.id " +
+                            "JOIN users u ON r.client=u.id " +
+                            "WHERE r.id=" + id);
+            if (rs.next()) {
+                request = new RequestExtended(
+                        rs.getInt("id"),
+                        rs.getInt("client"),
+                        rs.getDate("request_date"),
+                        rs.getString("description"),
+                        rs.getInt("status"),
+                        rs.getString("statusName"),
+                        rs.getString("clientName")
                 );
             }
         } catch (SQLException e) {

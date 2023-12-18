@@ -17,7 +17,7 @@ public class ClientServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = req.getPathInfo();
-        RequestExtendedDBService redbs = new RequestExtendedDBService();
+        RequestDBService rdbs = new RequestDBService();
 
         if (path == null || path.isEmpty() || "/".equals(path)) {
             User client = new UserDBService().getByID((Integer) req.getSession().getAttribute("id"));
@@ -35,7 +35,7 @@ public class ClientServlet extends HttpServlet {
                 if ("requests".equals(pathList[1])) {
                     switch (pathList.length) {
                         case 2 -> {
-                            List<RequestExtended> requests = redbs.getByClient(clientID);
+                            List<RequestExtended> requests = rdbs.getByClient(clientID);
                             if (requests != null) {
                                 req.setAttribute("requests", requests);
                             }
@@ -47,7 +47,7 @@ public class ClientServlet extends HttpServlet {
                                 req.getRequestDispatcher("/client-page/addRequest.jsp").forward(req, resp);
                             } else {
                                 int reqID = Integer.parseInt(requestID);
-                                RequestExtended request = redbs.getByID(reqID);
+                                RequestExtended request = rdbs.getForClientByID(reqID);
                                 if (request == null || request.getClient() != clientID) {
                                     throw new WebException(403, "Client is not the owner of this request");
                                 }
@@ -60,7 +60,7 @@ public class ClientServlet extends HttpServlet {
                         case 4 -> {
                             int reqID = Integer.parseInt(pathList[2]);
                             int servID = Integer.parseInt(pathList[3]);
-                            RequestExtended request = redbs.getByID(reqID);
+                            RequestExtended request = rdbs.getForClientByID(reqID);
                             if (request == null || request.getClient() != clientID) {
                                 throw new WebException(403, "Client is not the owner of this request");
                             }
