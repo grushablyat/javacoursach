@@ -1,5 +1,6 @@
 package servlet;
 
+import exception.WebException;
 import model.*;
 import service.*;
 
@@ -48,7 +49,7 @@ public class ClientServlet extends HttpServlet {
                                 int reqID = Integer.parseInt(requestID);
                                 RequestExtended request = redbs.getByID(reqID);
                                 if (request == null || request.getClient() != clientID) {
-                                    throw new Exception("404: Client is not the owner of this request");
+                                    throw new WebException(403, "Client is not the owner of this request");
                                 }
                                 List<model.client.Service> services = new ServiceDBService().getByRequest(reqID);
                                 req.setAttribute("request", request);
@@ -61,11 +62,11 @@ public class ClientServlet extends HttpServlet {
                             int servID = Integer.parseInt(pathList[3]);
                             RequestExtended request = redbs.getByID(reqID);
                             if (request == null || request.getClient() != clientID) {
-                                throw new Exception("404: Client is not the owner of this request");
+                                throw new WebException(403, "Client is not the owner of this request");
                             }
                             model.client.Service service = new ServiceDBService().getForClientByID(servID);
                             if (service == null || service.getRequest() != reqID) {
-                                throw new Exception("404: The service is not for this request");
+                                throw new WebException(403, "The service is not for this request");
                             }
                             List<Comment> comments = new CommentDBService().getByService(servID);
                             req.setAttribute("request", request);
@@ -74,13 +75,27 @@ public class ClientServlet extends HttpServlet {
                             req.getRequestDispatcher("/client-page/request-service.jsp").forward(req, resp);
                         }
                         default -> {
-                            throw new Exception("404: There is not such path");
+                            throw new WebException(404, "No such path");
                         }
                     }
                 } else {
-                    throw new Exception("404: No path without '/requests'-prefix");
+                    throw new WebException(404, "No path without '/requests'-prefix");
+                }
+            } catch (WebException e) {
+                System.out.println(e.getCode() + ": " + e.getMessage());
+                switch (e.getCode()) {
+                    case 403 -> {
+                        req.getRequestDispatcher("/client-page/403.jsp").forward(req, resp);
+                    }
+                    case 404 -> {
+                        req.getRequestDispatcher("/client-page/404.jsp").forward(req, resp);
+                    }
+                    default -> {
+                        req.getRequestDispatcher("/client-page/404.jsp").forward(req, resp);
+                    }
                 }
             } catch (Exception e) {
+                System.out.println(e.getMessage());
                 req.getRequestDispatcher("/client-page/404.jsp").forward(req, resp);
             }
         }

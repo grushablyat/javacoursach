@@ -15,14 +15,16 @@ public class CommentDBService {
 
         try {
             ResultSet rs = dbs.select(
-                    "SELECT id, text " +
+                    "SELECT * " +
                         "FROM comments " +
                         "WHERE service=" + service
             );
             while (rs.next()) {
                 comments.add(new Comment(
                         rs.getInt("id"),
-                        rs.getString("text")
+                        rs.getInt("service"),
+                        rs.getString("text"),
+                        rs.getDate("comment_date")
                 ));
             }
         } catch (SQLException e) {

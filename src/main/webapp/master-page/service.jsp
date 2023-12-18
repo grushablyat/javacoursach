@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/styles/style.css">
-    <title>Request-Service</title>
+    <title>Service</title>
 </head>
 <body>
 <header>
@@ -13,8 +13,8 @@
         <img class="logo" src="/images/whitelogo.jpg">
         <nav>
             <ul>
-                <li><a href="/client">Home</a></li>
-                <li><a href="/client/requests">Your requests</a></li>
+                <li><a href="/master">Home</a></li>
+                <li><a href="/master/services">Your services</a></li>
             </ul>
         </nav>
     </div>
@@ -22,47 +22,33 @@
 </header>
 
 <div class="recordList">
-    <h1>Your request</h1>
+    <h1>Your service</h1>
     <table class="recordTable">
         <thead>
         <tr>
             <th>ID</th>
+            <th>Request</th>
+            <th>Client</th>
             <th>Date</th>
             <th>Description</th>
             <th>Status</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>${request.id}</td>
-            <td>${request.date}</td>
-            <td>${request.description}</td>
-            <td>${request.statusName}</td>
-        </tr>
+            <tr>
+                <td>${service.id}</td>
+                <td>${service.request}</td>
+                <td>${service.clientName}</td>
+                <td>${service.date}</td>
+                <td>${service.description}</td>
+                <td>${service.statusName}</td>
+            </tr>
         </tbody>
     </table>
 </div>
 
 <div class="recordList">
-    <h1>Service</h1>
-    <table class="recordTable">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Master</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>${service.id}</td>
-            <td>${service.masterName}</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
-
-<div class="recordList">
-    <h1>Existing comments for current service</h1>
+    <h1>Your comments for this service</h1>
     <table class="recordTable">
         <thead>
         <tr>
@@ -73,6 +59,7 @@
         </thead>
         <tbody>
         <c:forEach items="${comments}" var="comment">
+<%--            <tr class="record" onclick="window.location.href='http://localhost:8080/master/services/${service.id}/${comment.id}'">--%>
             <tr>
                 <td>${comment.id}</td>
                 <td>${comment.date}</td>
@@ -81,6 +68,7 @@
         </c:forEach>
         </tbody>
     </table>
+    <input type="button" value="Add comment" onclick="window.location.href='http://localhost:8080/master/services/${service.id}/new'">
 </div>
 
 <footer>

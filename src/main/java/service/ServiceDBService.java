@@ -93,6 +93,37 @@ public class ServiceDBService {
         return service;
     }
 
+    public model.master.Service getForMasterByID(int id) {
+        model.master.Service service = null;
+
+        try {
+            ResultSet rs = dbs.select(
+                    "SELECT s.*, u.id as clientId, u.name as clientName, r.request_date, r.description, st.name as statusName " +
+                            "FROM service s " +
+                            "JOIN request r ON s.request=r.id " +
+                            "JOIN users u ON r.client=u.id " +
+                            "JOIN status st ON r.status=st.id " +
+                            "WHERE s.id=" + id
+            );
+            if (rs.next()) {
+                service = new model.master.Service(
+                        rs.getInt("id"),
+                        rs.getInt("request"),
+                        rs.getInt("master"),
+                        rs.getInt("clientId"),
+                        rs.getString("clientName"),
+                        rs.getDate("request_date"),
+                        rs.getString("description"),
+                        rs.getString("statusName")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (NullPointerException e) {}
+
+        return service;
+    }
+
     public List<model.master.Service> getByMaster(int master) {
         List<model.master.Service> services = new ArrayList<>();
 

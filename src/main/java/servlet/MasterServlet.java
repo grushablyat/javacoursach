@@ -1,6 +1,9 @@
 package servlet;
 
+import exception.WebException;
+import model.Comment;
 import model.User;
+import service.CommentDBService;
 import service.ServiceDBService;
 import service.UserDBService;
 
@@ -41,15 +44,39 @@ public class MasterServlet extends HttpServlet {
                             }
                             req.getRequestDispatcher("/master-page/services.jsp").forward(req, resp);
                         }
-                        case 3 -> {}
+                        case 3 -> {
+                            int servID = Integer.parseInt(pathList[2]);
+                            model.master.Service service = sdbs.getForMasterByID(servID);
+                            if (service == null || service.getMaster() != masterID) {
+                                throw new WebException(403, "Master is not the owner of this service");
+                            }
+                            List<Comment> comments = new CommentDBService().getByService(servID);
+                            req.setAttribute("service", service);
+                            req.setAttribute("comments", comments);
+                            req.getRequestDispatcher("/master-page/service.jsp").forward(req, resp);
+                        }
                         default -> {
-                            throw new Exception("404: No such path");
+                            throw new WebException(404, "No such path");
                         }
                     }
                 } else {
-                    throw new Exception("404: No path without '/services'-prefix");
+                    throw new WebException(404, "No path without '/services'-prefix");
+                }
+            } catch (WebException e) {
+                System.out.println(e.getCode() + ": " + e.getMessage());
+                switch (e.getCode()) {
+                    case 403 -> {
+                        req.getRequestDispatcher("/master-page/403.jsp").forward(req, resp);
+                    }
+                    case 404 -> {
+                        req.getRequestDispatcher("/master-page/404.jsp").forward(req, resp);
+                    }
+                    default -> {
+                        req.getRequestDispatcher("/master-page/404.jsp").forward(req, resp);
+                    }
                 }
             } catch (Exception e) {
+                System.out.println(e.getMessage());
                 req.getRequestDispatcher("/master-page/404.jsp").forward(req, resp);
             }
         }
