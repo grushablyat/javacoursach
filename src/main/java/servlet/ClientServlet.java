@@ -37,8 +37,8 @@ public class ClientServlet extends HttpServlet {
                             List<RequestExtended> requests = redbs.getByClient(clientID);
                             if (requests != null) {
                                 req.setAttribute("requests", requests);
-                                req.getRequestDispatcher("/client-page/requests.jsp").forward(req, resp);
                             }
+                            req.getRequestDispatcher("/client-page/requests.jsp").forward(req, resp);
                         }
                         case 3 -> {
                             String requestID = pathList[2];
@@ -77,6 +77,8 @@ public class ClientServlet extends HttpServlet {
                             throw new Exception("404: There is not such path");
                         }
                     }
+                } else {
+                    throw new Exception("404: No path without '/requests'-prefix");
                 }
             } catch (Exception e) {
                 req.getRequestDispatcher("/client-page/404.jsp").forward(req, resp);

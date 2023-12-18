@@ -93,6 +93,37 @@ public class ServiceDBService {
         return service;
     }
 
+    public List<model.master.Service> getByMaster(int master) {
+        List<model.master.Service> services = new ArrayList<>();
+
+        try {
+            ResultSet rs = dbs.select(
+                    "SELECT s.*, u.id as clientId, u.name as clientName, r.request_date, r.description, st.name as statusName " +
+                            "FROM service s " +
+                            "JOIN request r ON s.request=r.id " +
+                            "JOIN users u ON r.client=u.id " +
+                            "JOIN status st ON r.status=st.id " +
+                            "WHERE s.master=" + master
+            );
+            while (rs.next()) {
+                services.add(new model.master.Service(
+                        rs.getInt("id"),
+                        rs.getInt("request"),
+                        rs.getInt("master"),
+                        rs.getInt("clientId"),
+                        rs.getString("clientName"),
+                        rs.getDate("request_date"),
+                        rs.getString("description"),
+                        rs.getString("statusName")
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (NullPointerException e ) {}
+
+        return services;
+    }
+
     public boolean create(Service service) {
         String sql = "INSERT INTO service(request, master) values("
                 + service.getRequest() + ", "
