@@ -33,4 +33,12 @@ public class CommentDBService {
 
         return comments;
     }
+
+    public boolean create(Comment comment) {
+        String sql = "INSERT INTO comments(service, text) values ("
+                + comment.getService() + ", \'"
+                + comment.getText() + "\')";
+
+        return dbs.insert(sql);
+    }
 }

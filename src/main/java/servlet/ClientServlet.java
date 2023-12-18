@@ -83,24 +83,12 @@ public class ClientServlet extends HttpServlet {
                 }
             } catch (WebException e) {
                 System.out.println(e.getCode() + ": " + e.getMessage());
-                switch (e.getCode()) {
-                    case 403 -> {
-                        req.getRequestDispatcher("/client-page/403.jsp").forward(req, resp);
-                    }
-                    case 404 -> {
-                        req.getRequestDispatcher("/client-page/404.jsp").forward(req, resp);
-                    }
-                    default -> {
-                        req.getRequestDispatcher("/client-page/404.jsp").forward(req, resp);
-                    }
-                }
+                req.getRequestDispatcher("/client-page/" + e.getCode() + ".jsp").forward(req, resp);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 req.getRequestDispatcher("/client-page/404.jsp").forward(req, resp);
             }
         }
-
-        super.doGet(req, resp);
     }
 
     @Override
@@ -108,30 +96,36 @@ public class ClientServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         String path = req.getPathInfo();
 
-        if (path == null || path.isEmpty() || "/".equals(path)) {
-            return;
-        }
-
-        String result = "Nothing happened";
-        String[] pathList = path.split("/");
-
-        if ("requests".equals(pathList[1])
-                && pathList.length > 2
-                && "new".equals(pathList[2])) {
-            if (req.getParameter("add") != null) {
-                result = (new RequestDBService().create(new Request(
-                        (int) req.getSession().getAttribute("id"),
-                        req.getParameter("description")
-                )))
-                    ? "Request was successfully created!"
-                    : "Request was not created, error occurred";
-            } else {
-
+        try {
+            if (path == null || path.isEmpty() || "/".equals(path)) {
+                throw new WebException(405, "The request method POST is inappropriate for the URL:" + path);
             }
+
+            String[] pathList = path.split("/");
+
+            if ("requests".equals(pathList[1])
+                    && pathList.length == 3
+                    && "new".equals(pathList[2])) {
+                if (req.getParameter("add") != null) {
+                    new RequestDBService().create(new Request(
+                            (int) req.getSession().getAttribute("id"),
+                            req.getParameter("description")
+                    ));
+                    resp.sendRedirect("/client/requests");
+                    return;
+                } else {
+                    throw new WebException(405, "The request method POST is inappropriate for the URL:" + path);
+                }
+            } else {
+                throw new WebException(405, "The request method POST is inappropriate for the URL:" + path);
+            }
+        } catch (WebException e) {
+            System.out.println(e.getCode() + ": " + e.getMessage());
+            req.getRequestDispatcher("/client-page/" + e.getCode() + ".jsp").forward(req, resp);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
 
-//        req.setAttribute("addRequestResult", result);
-//        req.getRequestDispatcher()
-        resp.sendRedirect("/client/requests");
+        super.doPost(req, resp);
     }
 }

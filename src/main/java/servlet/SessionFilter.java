@@ -34,34 +34,29 @@ public class SessionFilter implements Filter {
             return;
         }
 
-        if (!path.isEmpty()
-                && !"/".equals(path)
-                && !"/404".equals(path)
-        ) {
-            switch ((int) session.getAttribute("role")) {
-                case 1 -> {
-                    if (!path.startsWith("/admin")) {
-                        req.getRequestDispatcher("/admin-page/404.jsp").forward(req, resp);
-                        return;
-                    }
-                }
-                case 2 -> {
-                    if (!path.startsWith("/master")) {
-                        req.getRequestDispatcher("/master-page/404.jsp").forward(req, resp);
-                        return;
-                    }
-                }
-                case 3 -> {
-                    if (!path.startsWith("/client")) {
-                        req.getRequestDispatcher("/client-page/404.jsp").forward(req, resp);
-                        return;
-                    }
-                }
-                default -> {
-                    // Is it available option?
-                    req.getRequestDispatcher("/404.jsp").forward(req, resp);
+        switch ((int) session.getAttribute("role")) {
+            case 1 -> {
+                if (!path.startsWith("/admin")) {
+                    req.getRequestDispatcher("/admin-page/404.jsp").forward(req, resp);
                     return;
                 }
+            }
+            case 2 -> {
+                if (!path.startsWith("/master")) {
+                    req.getRequestDispatcher("/master-page/404.jsp").forward(req, resp);
+                    return;
+                }
+            }
+            case 3 -> {
+                if (!path.startsWith("/client")) {
+                    req.getRequestDispatcher("/client-page/404.jsp").forward(req, resp);
+                    return;
+                }
+            }
+            default -> {
+                // Is it available option?
+                req.getRequestDispatcher("/404.jsp").forward(req, resp);
+                return;
             }
         }
 
