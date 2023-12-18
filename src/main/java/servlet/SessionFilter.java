@@ -28,46 +28,43 @@ public class SessionFilter implements Filter {
         HttpSession session = req.getSession(false);
         if (session == null
                 || session.getAttribute("id") == null
-                || session.getAttribute("role") == null) {
+                || session.getAttribute("role") == null
+        ) {
             resp.sendRedirect("/login");
             return;
         }
 
-        boolean notFound = true;
-        if (path.isEmpty()
-                || "/".equals(path)
-                || "/404".equals(path)) {
-            notFound = false;
-        } else {
+        if (!path.isEmpty()
+                && !"/".equals(path)
+                && !"/404".equals(path)
+        ) {
             switch ((int) session.getAttribute("role")) {
                 case 1 -> {
-                    if (path.startsWith("/users")) {
-                        notFound = false;
+                    if (!path.startsWith("/admin")) {
+                        req.getRequestDispatcher("/admin-page/404.jsp").forward(req, resp);
+                        return;
                     }
                 }
                 case 2 -> {
-                    if (path.startsWith("/services")) {
-                        notFound = false;
+                    if (!path.startsWith("/master")) {
+                        req.getRequestDispatcher("/master-page/404.jsp").forward(req, resp);
+                        return;
                     }
                 }
                 case 3 -> {
-                    if (path.startsWith("/client")) {
-                        notFound = false;
-                    } else {
+                    if (!path.startsWith("/client")) {
                         req.getRequestDispatcher("/client-page/404.jsp").forward(req, resp);
                         return;
                     }
                 }
                 default -> {
+                    // Is it available option?
+                    req.getRequestDispatcher("/404.jsp").forward(req, resp);
+                    return;
                 }
             }
         }
 
-        // Delete when all types of users will have their own 404
-        if (notFound) {
-            req.getRequestDispatcher("/404.jsp").forward(req, resp);
-        } else {
-            filterChain.doFilter(servletRequest, servletResponse);
-        }
+        filterChain.doFilter(servletRequest, servletResponse);
     }
 }

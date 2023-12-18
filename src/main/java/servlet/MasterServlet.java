@@ -10,23 +10,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/client/*")
-public class ClientServlet extends HttpServlet {
+@WebServlet("/master/*")
+public class MasterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = req.getPathInfo();
 
         if (path == null || path.isEmpty() || "/".equals(path)) {
-            User client = new UserDBService().getByID((Integer) req.getSession().getAttribute("id"));
-            if (client == null) {
+            User master = new UserDBService().getByID((Integer) req.getSession().getAttribute("id"));
+            if (master == null) {
                 resp.sendRedirect("/logout");
                 return;
             }
 
-            req.setAttribute("client", client);
-            req.getRequestDispatcher("/client-page/profile.jsp").forward(req, resp);
+            req.setAttribute("master", master);
+            req.getRequestDispatcher("/master-page/profile.jsp").forward(req, resp);
         } else {
-            req.getRequestDispatcher("/client-page/404.jsp").forward(req, resp);
+            req.getRequestDispatcher("/master-page/404.jsp").forward(req, resp);
         }
 
         super.doGet(req, resp);
