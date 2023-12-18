@@ -1,9 +1,11 @@
 package service;
 
 import model.User;
+import org.checkerframework.checker.units.qual.A;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLWarning;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +24,27 @@ public class UserDBService {
                         rs.getString("email"),
                         rs.getString("login"),
                         rs.getString("password"),
+                        rs.getInt("role")
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (NullPointerException e) {}
+
+        return users;
+    }
+
+    public List<User> getMasters() {
+        List<User> users = new ArrayList<>();
+
+        try {
+            ResultSet rs = dbs.select("SELECT * FROM users WHERE role=2");
+            while (rs.next()) {
+                users.add(new User(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("login"),
                         rs.getInt("role")
                 ));
             }

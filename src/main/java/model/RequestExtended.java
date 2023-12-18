@@ -10,7 +10,7 @@ public class RequestExtended {
     private int status;
     private String statusName;
 
-    private String name;
+    private String clientName;
 
     public RequestExtended(int client, String description) {
         this.client = client;
@@ -24,14 +24,14 @@ public class RequestExtended {
         this.statusName = statusName;
     }
 
-    public RequestExtended(int id, int client, Date date, String description, int status, String statusName, String name) {
+    public RequestExtended(int id, int client, Date date, String description, int status, String statusName, String clientName) {
         this(client, description);
         this.id = id;
         this.date = date;
         this.description = description;
         this.status = status;
         this.statusName = statusName;
-        this.name = name;
+        this.clientName = clientName;
     }
 
     public int getId() {
@@ -82,11 +82,11 @@ public class RequestExtended {
         this.statusName = statusName;
     }
 
-    public String getName() {
-        return name;
+    public String getClientName() {
+        return clientName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 }
