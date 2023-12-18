@@ -1,9 +1,6 @@
 package model.client;
 
-public class Service {
-    private int id;
-    private int request;
-    private int master;
+public class Service extends model.Service {
 
     public String getMasterName() {
         return masterName;
@@ -31,29 +28,5 @@ public class Service {
         this.master = master;
         this.id = id;
         this.masterName = masterName;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getRequest() {
-        return request;
-    }
-
-    public void setRequest(int request) {
-        this.request = request;
-    }
-
-    public int getMaster() {
-        return master;
-    }
-
-    public void setMaster(int master) {
-        this.master = master;
     }
 }

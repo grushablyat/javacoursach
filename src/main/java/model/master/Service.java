@@ -2,10 +2,7 @@ package model.master;
 
 import java.sql.Date;
 
-public class Service {
-    private int id;
-    private int request;
-    private int master;
+public class Service extends model.Service {
     private int client;
     private String clientName;
     private Date date;
@@ -80,29 +77,5 @@ public class Service {
 
     public void setStatusName(String statusName) {
         this.statusName = statusName;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getRequest() {
-        return request;
-    }
-
-    public void setRequest(int request) {
-        this.request = request;
-    }
-
-    public int getMaster() {
-        return master;
-    }
-
-    public void setMaster(int master) {
-        this.master = master;
     }
 }

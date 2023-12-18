@@ -1,9 +1,11 @@
 package model;
 
 public class Service {
-    private int id;
-    private int request;
-    private int master;
+    protected int id;
+    protected int request;
+    protected int master;
+
+    public Service() {}
 
     public Service(int request, int master) {
         this.request = request;
