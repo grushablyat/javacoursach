@@ -35,7 +35,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
+        <tr class="record" onclick="window.location.href='http://localhost:8080/admin/requests/${request.id}/edit'">
             <td>${request.id}</td>
             <td>${request.clientName}</td>
             <td>${request.date}</td>

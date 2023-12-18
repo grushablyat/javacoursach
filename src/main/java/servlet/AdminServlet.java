@@ -2,10 +2,7 @@ package servlet;
 
 import exception.WebException;
 import jdk.swing.interop.SwingInterOpUtils;
-import model.Comment;
-import model.RequestExtended;
-import model.Service;
-import model.User;
+import model.*;
 import service.CommentDBService;
 import service.RequestDBService;
 import service.ServiceDBService;
@@ -17,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 @WebServlet("/admin/*")
@@ -69,6 +67,10 @@ public class AdminServlet extends HttpServlet {
                                     req.setAttribute("reqID", reqID);
                                     req.setAttribute("masters", masters);
                                     req.getRequestDispatcher("/admin-page/addService.jsp").forward(req, resp);
+                                } else if ("edit".equals(pathList[3])) {
+                                    Request request = new RequestDBService().getByID(reqID);
+                                    req.setAttribute("request", request);
+                                    req.getRequestDispatcher("/admin-page/editRequest.jsp").forward(req, resp);
                                 } else {
                                     int servID = Integer.parseInt(pathList[3]);
                                     RequestExtended request = new RequestDBService().getForClientByID(reqID);
@@ -128,18 +130,40 @@ public class AdminServlet extends HttpServlet {
 
             if ("requests".equals(pathList[1])
                     && pathList.length == 4
-                    && "new".equals(pathList[3])
             ) {
-                if (req.getParameter("add") != null) {
-                    int reqID = Integer.parseInt(pathList[2]);
-                    new ServiceDBService().create(new Service(
-                            reqID,
-                            Integer.parseInt(req.getParameter("master"))
-                    ));
-                    resp.sendRedirect("/admin/requests/" + reqID);
-                    return;
-                } else {
-                    throw new WebException(405, "The request method POST is inappropriate for the URL: " + path);
+                switch (pathList[3]) {
+                    case "new" -> {
+                        if (req.getParameter("add") != null) {
+                            int reqID = Integer.parseInt(pathList[2]);
+                            new ServiceDBService().create(new Service(
+                                    reqID,
+                                    Integer.parseInt(req.getParameter("master"))
+                            ));
+                            resp.sendRedirect("/admin/requests/" + reqID);
+                            return;
+                        } else {
+                            throw new WebException(405, "The request method POST is inappropriate for the URL: " + path);
+                        }
+                    }
+                    case "edit" -> {
+                        if (req.getParameter("edit") != null) {
+                            int reqID = Integer.parseInt(pathList[2]);
+                            new RequestDBService().edit(reqID, new Request(
+                                    reqID,
+                                    Integer.parseInt(req.getParameter("client")),
+                                    Date.valueOf(req.getParameter("date")),
+                                    req.getParameter("description"),
+                                    Integer.parseInt(req.getParameter("status"))
+                            ));
+                            resp.sendRedirect("/admin/requests/" + reqID);
+                            return;
+                        } else {
+                            throw new WebException(405, "The request method POST is inappropriate for the URL: " + path);
+                        }
+                    }
+                    default -> {
+                        throw new WebException(405, "The request method POST is inappropriate for the URL: " + path);
+                    }
                 }
             } else {
                 throw new WebException(405, "The request method POST is inappropriate for the URL: " + path);
