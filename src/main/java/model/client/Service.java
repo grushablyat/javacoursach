@@ -20,6 +20,12 @@ public class Service {
         this.masterName = masterName;
     }
 
+    public Service(int id, int request, String masterName) {
+        this.request = request;
+        this.id = id;
+        this.masterName = masterName;
+    }
+
     public Service(int id, int request, int master, String masterName) {
         this.request = request;
         this.master = master;

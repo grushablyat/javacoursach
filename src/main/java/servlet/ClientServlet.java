@@ -1,13 +1,7 @@
 package servlet;
 
-import model.Request;
-import model.RequestExtended;
-import model.Service;
-import model.User;
-import service.RequestDBService;
-import service.RequestExtendedDBService;
-import service.ServiceDBService;
-import service.UserDBService;
+import model.*;
+import service.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -53,7 +47,7 @@ public class ClientServlet extends HttpServlet {
                             } else {
                                 int reqID = Integer.parseInt(requestID);
                                 RequestExtended request = redbs.getByID(reqID);
-                                if (request.getClient() != clientID) {
+                                if (request == null || request.getClient() != clientID) {
                                     throw new Exception("404: Client is not the owner of this request");
                                 }
                                 List<model.client.Service> services = new ServiceDBService().getByRequest(reqID);
@@ -61,6 +55,23 @@ public class ClientServlet extends HttpServlet {
                                 req.setAttribute("services", services);
                                 req.getRequestDispatcher("/client-page/request.jsp").forward(req, resp);
                             }
+                        }
+                        case 4 -> {
+                            int reqID = Integer.parseInt(pathList[2]);
+                            int servID = Integer.parseInt(pathList[3]);
+                            RequestExtended request = redbs.getByID(reqID);
+                            if (request == null || request.getClient() != clientID) {
+                                throw new Exception("404: Client is not the owner of this request");
+                            }
+                            model.client.Service service = new ServiceDBService().getForClientByID(servID);
+                            if (service == null || service.getRequest() != reqID) {
+                                throw new Exception("404: The service is not for this request");
+                            }
+                            List<Comment> comments = new CommentDBService().getByService(servID);
+                            req.setAttribute("request", request);
+                            req.setAttribute("service", service);
+                            req.setAttribute("comments", comments);
+                            req.getRequestDispatcher("/client-page/request-service.jsp").forward(req, resp);
                         }
                         default -> {
                             throw new Exception("404: There is not such path");

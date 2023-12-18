@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/styles/style.css">
-    <title>Request</title>
+    <title>Request-Service</title>
 </head>
 <body>
 <header>
@@ -33,18 +33,18 @@
         </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>${request.id}</td>
-                <td>${request.date}</td>
-                <td>${request.description}</td>
-                <td>${request.statusName}</td>
-            </tr>
+        <tr>
+            <td>${request.id}</td>
+            <td>${request.date}</td>
+            <td>${request.description}</td>
+            <td>${request.statusName}</td>
+        </tr>
         </tbody>
     </table>
 </div>
 
 <div class="recordList">
-    <h1>Existing services for your request</h1>
+    <h1>Service</h1>
     <table class="recordTable">
         <thead>
         <tr>
@@ -53,10 +53,29 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${services}" var="service">
-            <tr class="record" onclick="window.location.href='http://localhost:8080/client/requests/${request.id}/${service.id}'">
-                <td>${service.id}</td>
-                <td>${service.masterName}</td>
+        <tr>
+            <td>${service.id}</td>
+            <td>${service.masterName}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="recordList">
+    <h1>Existing comments for current service</h1>
+    <table class="recordTable">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Text</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${comments}" var="comment">
+            <tr>
+                <td>${comment.id}</td>
+                <td>${comment.text}</td>
+                <td>${comment.date}</td>
             </tr>
         </c:forEach>
         </tbody>

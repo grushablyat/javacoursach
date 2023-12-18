@@ -48,6 +48,7 @@ CREATE TABLE comments (
 	id SERIAL PRIMARY KEY,
 	service INT NOT NULL,
 	text TEXT,
+	comment_date DATE DEFAULT CURRENT_DATE,
 	FOREIGN KEY (service) REFERENCES service (id)
 );
 
@@ -74,13 +75,21 @@ INSERT INTO users(name, email, login, password, role) VALUES
 INSERT INTO request(client, description, status) VALUES
 (3, 'u menya vse slomalos, pamagiti', 3),
 (5, 'set router', 2),
-(3, 'computer crushed', 1);
+(3, 'computer crushed', 1),
+(5, 'test request', 1),
+(8, 'test req 1', 1),
+(8, 'test req 2', 1),
+(8, 'help me please, i do no wo to do', 1);
 
 INSERT INTO service(request, master) VALUES
 (1, 1),
-(2, 2);
+(2, 2),
+(5, 4),
+(6, 2),
+(6, 4);
 
 INSERT INTO comments(service, text) VALUES
 (1, 'vse pochinili, zaebumba'),
-(2, 'nifiga ne poluchilos');
+(2, 'nifiga ne poluchilos'),
+(4, 'delau, no poka slozhno');
 

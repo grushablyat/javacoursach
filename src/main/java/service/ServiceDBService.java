@@ -70,6 +70,29 @@ public class ServiceDBService {
         return service;
     }
 
+    public model.client.Service getForClientByID(int id) {
+        model.client.Service service = null;
+
+        try {
+            ResultSet rs = dbs.select(
+                    "SELECT s.id as id, s.request as request, u.name as masterName " +
+                            "FROM service s " +
+                            "JOIN users u ON s.master=u.id " +
+                            "WHERE s.id=" + id);
+            if (rs.next()) {
+                service = new model.client.Service(
+                        rs.getInt("id"),
+                        rs.getInt("request"),
+                        rs.getString("masterName")
+                );
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (NullPointerException e) {}
+
+        return service;
+    }
+
     public boolean create(Service service) {
         String sql = "INSERT INTO service(request, master) values("
                 + service.getRequest() + ", "
