@@ -1,6 +1,6 @@
 package service;
 
-import model.Service;
+import model.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,6 +20,28 @@ public class ServiceDBService {
                         rs.getInt("id"),
                         rs.getInt("request"),
                         rs.getInt("master")
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (NullPointerException e) {}
+
+        return services;
+    }
+
+    public List<model.client.Service> getByRequest(int request) {
+        List<model.client.Service> services = new ArrayList<>();
+
+        try {
+            ResultSet rs = dbs.select(
+                    "SELECT s.id as id, u.name as masterName " +
+                        "FROM service s " +
+                        "JOIN users u ON s.master=u.id " +
+                        "WHERE s.request=" + request);
+            while (rs.next()) {
+                services.add(new model.client.Service(
+                        rs.getInt("id"),
+                        rs.getString("masterName")
                 ));
             }
         } catch (SQLException e) {

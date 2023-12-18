@@ -1,32 +1,37 @@
 package model;
 
-import java.text.SimpleDateFormat;
 import java.sql.Date;
 
-public class Request {
+public class RequestExtended {
     private int id;
     private int client;
     private Date date;
     private String description;
     private int status;
+    private String statusName;
 
-    public Request(int client, String description) {
+    private String name;
+
+    public RequestExtended(int client, String description) {
         this.client = client;
         this.description = description;
     }
-    public Request(int client, String description, int status) {
-        this(client, description);
-        this.status = status;
-    }
 
-    public Request(int client, Date date, String description, int status) {
-        this(client, description, status);
-        this.date = date;
-    }
-
-    public Request(int id, int client, Date date, String description, int status) {
-        this(client, date, description, status);
+    public RequestExtended(int id, Date date, String description, String statusName) {
         this.id = id;
+        this.date = date;
+        this.description = description;
+        this.statusName = statusName;
+    }
+
+    public RequestExtended(int id, int client, Date date, String description, int status, String statusName, String name) {
+        this(client, description);
+        this.id = id;
+        this.date = date;
+        this.description = description;
+        this.status = status;
+        this.statusName = statusName;
+        this.name = name;
     }
 
     public int getId() {
@@ -49,10 +54,6 @@ public class Request {
         return date;
     }
 
-    public String getDateString() {
-        return new SimpleDateFormat("yyyy-MM-dd").format(date);
-    }
-
     public void setDate(Date date) {
         this.date = date;
     }
@@ -71,5 +72,21 @@ public class Request {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
