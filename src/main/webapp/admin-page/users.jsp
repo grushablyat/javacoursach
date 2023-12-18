@@ -44,7 +44,7 @@
                 <td>${user.email}</td>
                 <td>${user.login}</td>
 <%--                <td>${user.password}</td>--%>
-                <td>${user.role}</td>
+                <td>${user.roleName}</td>
             </tr>
         </c:forEach>
         </tbody>

@@ -93,7 +93,7 @@ public class AdminServlet extends HttpServlet {
                     }
                     case "users" -> {
                         if (pathList.length == 2) {
-                            List<User> users = new UserDBService().getAll();
+                            List<model.admin.User> users = new UserDBService().getForAdminAll();
                             req.setAttribute("users", users);
                             req.getRequestDispatcher("/admin-page/users.jsp").forward(req, resp);
                         } else {

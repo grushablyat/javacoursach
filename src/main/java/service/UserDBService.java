@@ -34,6 +34,32 @@ public class UserDBService {
         return users;
     }
 
+    public List<model.admin.User> getForAdminAll() {
+        List<model.admin.User> users = new ArrayList<>();
+
+        try {
+            ResultSet rs = dbs.select(
+                    "SELECT u.*, r.name as roleName " +
+                    "FROM users u " +
+                    "JOIN role r ON u.role=r.id"
+            );
+            while (rs.next()) {
+                users.add(new model.admin.User(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email"),
+                        rs.getString("login"),
+                        rs.getInt("role"),
+                        rs.getString("roleName")
+                ));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } catch (NullPointerException e) {}
+
+        return users;
+    }
+
     public List<User> getMasters() {
         List<User> users = new ArrayList<>();
 
