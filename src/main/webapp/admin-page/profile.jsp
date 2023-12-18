@@ -15,8 +15,6 @@
                 <li><a href="/admin">Home</a></li>
                 <li><a href="/admin/users">Users</a></li>
                 <li><a href="/admin/requests">Requests</a></li>
-                <li><a href="/admin/services">Services</a></li>
-                <li><a href="/admin/comments">Comments</a></li>
             </ul>
         </nav>
     </div>

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/styles/style.css">
-    <title>Requests</title>
+    <title>Пользователи</title>
 </head>
 <body>
 <header>
@@ -23,29 +23,33 @@
 </header>
 
 <div class="recordList">
-    <h1>All requests</h1>
+    <h1>All users</h1>
     <table class="recordTable">
         <thead>
         <tr>
             <th>ID</th>
-            <th>Client</th>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Status</th>
+            <th>Name</th>
+            <th>E-mail</th>
+            <th>Login</th>
+<%--            <th>Password Hash</th>--%>
+            <th>Role</th>
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${requests}" var="request">
-            <tr class="record" onclick="window.location.href='http://localhost:8080/admin/requests/${request.id}'">
-                <td>${request.id}</td>
-                <td>${request.clientName}</td>
-                <td>${request.date}</td>
-                <td>${request.description}</td>
-                <td>${request.statusName}</td>
+        <c:forEach items="${users}" var="user">
+<%--            <tr class="record" onclick="window.location.href='http://localhost:8080/users/${user.id}'">--%>
+            <tr>
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td>${user.login}</td>
+<%--                <td>${user.password}</td>--%>
+                <td>${user.role}</td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
+<%--    <input type="button" value="Add user" onclick="window.location.href='http://localhost:8080/users/new'">--%>
 </div>
 
 <footer>

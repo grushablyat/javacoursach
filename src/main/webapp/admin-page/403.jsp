@@ -22,8 +22,8 @@
 </header>
 
 <div id="content">
-    <h1 class="retroshadow">404</h1>
-    <p>Sorry! This is not the web page you are looking for.</p>
+    <h1 class="retroshadow">403</h1>
+    <p>Sorry! You don't have a permission to access this resource</p>
 </div>
 
 <footer>

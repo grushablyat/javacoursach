@@ -22,8 +22,8 @@
 </header>
 
 <div id="content">
-    <h1 class="retroshadow">404</h1>
-    <p>Sorry! This is not the web page you are looking for.</p>
+    <h1 class="retroshadow">405</h1>
+    <p>Sorry! The request method POST is inappropriate for the URL.</p>
 </div>
 
 <footer>

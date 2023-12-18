@@ -91,7 +91,15 @@ public class AdminServlet extends HttpServlet {
                             }
                         }
                     }
-                    case "users" -> {}
+                    case "users" -> {
+                        if (pathList.length == 2) {
+                            List<User> users = new UserDBService().getAll();
+                            req.setAttribute("users", users);
+                            req.getRequestDispatcher("/admin-page/users.jsp").forward(req, resp);
+                        } else {
+                            throw new WebException(404, "No such path: " + path);
+                        }
+                    }
                     default -> {
                         throw new WebException(404, "No such path: " + path);
                     }
