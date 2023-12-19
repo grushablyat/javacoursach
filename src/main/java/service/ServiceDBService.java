@@ -37,7 +37,9 @@ public class ServiceDBService {
                     "SELECT s.id as id, u.name as masterName " +
                         "FROM service s " +
                         "JOIN users u ON s.master=u.id " +
-                        "WHERE s.request=" + request);
+                        "WHERE s.request=" + request + " " +
+                        "ORDER BY s.id"
+                    );
             while (rs.next()) {
                 services.add(new model.client.Service(
                         rs.getInt("id"),
@@ -134,7 +136,8 @@ public class ServiceDBService {
                             "JOIN request r ON s.request=r.id " +
                             "JOIN users u ON r.client=u.id " +
                             "JOIN status st ON r.status=st.id " +
-                            "WHERE s.master=" + master
+                            "WHERE s.master=" + master + " " +
+                            "ORDER BY s.id"
             );
             while (rs.next()) {
                 services.add(new model.master.Service(

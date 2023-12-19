@@ -17,7 +17,8 @@ public class CommentDBService {
             ResultSet rs = dbs.select(
                     "SELECT * " +
                         "FROM comments " +
-                        "WHERE service=" + service
+                        "WHERE service=" + service + " " +
+                        "ORDER BY id"
             );
             while (rs.next()) {
                 comments.add(new Comment(

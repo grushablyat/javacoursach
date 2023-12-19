@@ -41,7 +41,8 @@ public class UserDBService {
             ResultSet rs = dbs.select(
                     "SELECT u.*, r.name as roleName " +
                     "FROM users u " +
-                    "JOIN role r ON u.role=r.id"
+                    "JOIN role r ON u.role=r.id " +
+                    "ORDER BY u.id"
             );
             while (rs.next()) {
                 users.add(new model.admin.User(
@@ -64,7 +65,7 @@ public class UserDBService {
         List<User> users = new ArrayList<>();
 
         try {
-            ResultSet rs = dbs.select("SELECT * FROM users WHERE role=2");
+            ResultSet rs = dbs.select("SELECT * FROM users WHERE role=2 ORDER BY id");
             while (rs.next()) {
                 users.add(new User(
                         rs.getInt("id"),

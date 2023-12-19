@@ -39,7 +39,9 @@ public class RequestDBService {
                     "SELECT r.*, s.name as statusName, u.name as clientName " +
                             "FROM request r " +
                             "JOIN status s ON r.status=s.id " +
-                            "JOIN users u ON r.client=u.id");
+                            "JOIN users u ON r.client=u.id " +
+                            "ORDER BY r.id"
+                    );
             while (rs.next()) {
                 requests.add(new model.client.Request(
                         rs.getInt("id"),
@@ -66,7 +68,9 @@ public class RequestDBService {
                     "SELECT r.*, s.name as statusName " +
                             "FROM request r " +
                             "JOIN status s ON r.status=s.id " +
-                            "WHERE r.client=" + client);
+                            "WHERE r.client=" + client + " " +
+                            "ORDER BY r.id"
+                    );
             while (rs.next()) {
                 requests.add(new model.client.Request(
                         rs.getInt("id"),
