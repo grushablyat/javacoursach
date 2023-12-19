@@ -55,7 +55,7 @@ public class SessionFilter implements Filter {
             }
             default -> {
                 // Is it an available option?
-                resp.sendRedirect("/login");
+                resp.sendRedirect("/logout");
                 return;
             }
         }

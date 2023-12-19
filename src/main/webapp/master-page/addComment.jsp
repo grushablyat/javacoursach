@@ -20,7 +20,7 @@
     <a href="/logout"><img class="logout" src="/images/logout.png" alt="Log Out"></a>
 </header>
 
-<div>
+<div style="margin: 0 auto 0 auto; width: 270px">
     <form method="post">
         <p>You can add comment here</p>
         <table>
