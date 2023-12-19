@@ -12,8 +12,8 @@
 </head>
 <body>
 <div class="background">
-    <div class="shape"></div>
-    <div class="shape"></div>
+    <div class="shape login"></div>
+    <div class="shape login"></div>
 </div>
 <form method="post">
     <h3>Login Here</h3>

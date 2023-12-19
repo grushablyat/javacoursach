@@ -11,8 +11,8 @@
 </head>
 <body>
 <div class="background">
-    <div class="shape"></div>
-    <div class="shape"></div>
+    <div class="shape signup"></div>
+    <div class="shape signup"></div>
 </div>
 <form method="post">
     <h3>Sign up Here</h3>

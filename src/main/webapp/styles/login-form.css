@@ -19,48 +19,69 @@ body {
 }
 
 .background .shape {
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 150px;
     position: absolute;
     border-radius: 50%;
 }
 
 .shape:first-child {
-    background: linear-gradient(
-        #6336b6,
-        #855fc5
-    );
-    left: -80px;
-    top: -80px;
+    &.login {
+        background: linear-gradient(
+                #6336b6,
+                #855fc5
+        );
+        left: 0px;
+        top: -15px;
+    }
+
+    &.signup {
+        background: linear-gradient(
+                #6336b6,
+                #855fc5
+        );
+        right: -20px;
+        top: -120px;
+    }
 }
 
 .shape:last-child {
-    background: linear-gradient(
-        to right,
-        #40008f,
-        #6336b6
-    );
-    right: -30px;
-    bottom: -80px;
+    &.login {
+        background: linear-gradient(
+                to right,
+                #40008f,
+                #6336b6
+        );
+        right: 0px;
+        bottom: -15px;
+    }
+
+    &.signup {
+        background: linear-gradient(
+                to right,
+                #40008f,
+                #6336b6
+        );
+        left: -30px;
+        bottom: -120px;
+    }
 }
 
 form {
-    height: 520px;
-    width: 400px;
     background-color: rgba(255,255,255,0.13);
     position: absolute;
     transform: translate(-50%,-50%);
     top: 50%;
     left: 50%;
-    border-radius: 10px;
+    border-radius: 20px;
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255,255,255,0.1);
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
-    padding: 50px 35px;
+    padding: 20px 30px;
 }
 
 form * {
-    font-family: 'Poppins',sans-serif;
+    font-family: 'Poppins', sans-serif;
     color: #000000;
     letter-spacing: 0.5px;
     outline: none;
@@ -68,7 +89,7 @@ form * {
 }
 
 form h3 {
-    font-size: 32px;
+    font-size: 18px;
     font-weight: 500;
     line-height: 42px;
     text-align: center;
@@ -76,8 +97,8 @@ form h3 {
 
 label {
     display: block;
-    margin-top: 30px;
-    font-size: 16px;
+    margin-top: 8px;
+    font-size: 14px;
     font-weight: 500;
 }
 
@@ -85,11 +106,11 @@ input[type=text],
 input[type=email],
 input[type=password] {
     display: block;
-    height: 50px;
+    height: 35px;
     width: 100%;
     background-color: rgb(232, 227, 255);
     border-radius: 3px;
-    padding: 0 10px;
+    padding: 0 15px;
     margin-top: 8px;
     font-size: 14px;
     font-weight: 300;
@@ -100,12 +121,12 @@ input[type=password] {
 }
 
 input[type=submit] {
-    margin-top: 50px;
+    margin-top: 30px;
     width: 100%;
     background-color: #892bcb;
     color: #ffffff;
-    padding: 15px 0;
-    font-size: 18px;
+    padding: 10px 0;
+    font-size: 16px;
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
