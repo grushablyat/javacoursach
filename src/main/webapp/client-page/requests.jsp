@@ -4,21 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/styles/style.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
     <title>Requests</title>
 </head>
 <body>
 <header>
     <div class="logolist">
-        <img class="logo" src="/images/whitelogo.jpg">
+        <img class="logo" src="${pageContext.request.contextPath}/images/whitelogo.jpg">
         <nav>
             <ul>
-                <li><a href="/client">Home</a></li>
-                <li><a href="/client/requests">Your requests</a></li>
+                <li><a href="${pageContext.request.contextPath}/client">Home</a></li>
+                <li><a href="${pageContext.request.contextPath}/client/requests">Your requests</a></li>
             </ul>
         </nav>
     </div>
-    <a href="/logout"><img class="logout" src="/images/logout.png" alt="Log Out"></a>
+    <a href="${pageContext.request.contextPath}/logout">
+        <img class="logout" src="${pageContext.request.contextPath}/images/logout.png" alt="Log Out">
+    </a>
 </header>
 
 <div class="recordList">
@@ -34,7 +36,7 @@
         </thead>
         <tbody>
         <c:forEach items="${requests}" var="request">
-            <tr class="record" onclick="window.location.href='http://localhost:8080/client/requests/${request.id}'">
+            <tr class="record" onclick="window.location.href='${pageContext.request.contextPath}/client/requests/${request.id}'">
                 <td>${request.id}</td>
                 <td>${request.date}</td>
                 <td>${request.description}</td>
@@ -43,7 +45,7 @@
         </c:forEach>
         </tbody>
     </table>
-    <input type="button" value="Add request" onclick="window.location.href='http://localhost:8080/client/requests/new'">
+    <input type="button" value="Add request" onclick="window.location.href='${pageContext.request.contextPath}/client/requests/new'">
 </div>
 
 <footer>

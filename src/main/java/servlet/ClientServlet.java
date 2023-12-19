@@ -22,7 +22,7 @@ public class ClientServlet extends HttpServlet {
         if (path == null || path.isEmpty() || "/".equals(path)) {
             User client = new UserDBService().getByID((Integer) req.getSession().getAttribute("id"));
             if (client == null) {
-                resp.sendRedirect("/logout");
+                resp.sendRedirect(req.getContextPath() + "/logout");
                 return;
             }
 
@@ -111,7 +111,7 @@ public class ClientServlet extends HttpServlet {
                             (int) req.getSession().getAttribute("id"),
                             req.getParameter("description")
                     ));
-                    resp.sendRedirect("/client/requests");
+                    resp.sendRedirect(req.getContextPath() + "/client/requests");
                     return;
                 } else {
                     throw new WebException(405, "The request method POST is inappropriate for the URL:" + path);
@@ -124,6 +124,7 @@ public class ClientServlet extends HttpServlet {
             req.getRequestDispatcher("/client-page/" + e.getCode() + ".jsp").forward(req, resp);
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            req.getRequestDispatcher("/admin-page/404.jsp").forward(req, resp);
         }
 
         super.doPost(req, resp);

@@ -25,7 +25,7 @@ public class MasterServlet extends HttpServlet {
         if (path == null || path.isEmpty() || "/".equals(path)) {
             User master = new UserDBService().getByID((Integer) req.getSession().getAttribute("id"));
             if (master == null) {
-                resp.sendRedirect("/logout");
+                resp.sendRedirect(req.getContextPath() + "/logout");
                 return;
             }
 
@@ -102,7 +102,7 @@ public class MasterServlet extends HttpServlet {
                             servID,
                             req.getParameter("text")
                     ));
-                    resp.sendRedirect("/master/services/" + servID);
+                    resp.sendRedirect(req.getContextPath() + "/master/services/" + servID);
                     return;
                 } else {
                     throw new WebException(405, "The request method POST is inappropriate for the URL: " + path);
@@ -115,6 +115,7 @@ public class MasterServlet extends HttpServlet {
             req.getRequestDispatcher("/master-page/" + e.getCode() + ".jsp").forward(req, resp);
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            req.getRequestDispatcher("/admin-page/404.jsp").forward(req, resp);
         }
 
         super.doPost(req, resp);

@@ -26,7 +26,7 @@ public class AdminServlet extends HttpServlet {
         if (path == null || path.isEmpty() || "/".equals(path)) {
             User admin = new UserDBService().getByID((Integer) req.getSession().getAttribute("id"));
             if (admin == null) {
-                resp.sendRedirect("/logout");
+                resp.sendRedirect(req.getContextPath() + "/logout");
                 return;
             }
 
@@ -139,7 +139,7 @@ public class AdminServlet extends HttpServlet {
                                     reqID,
                                     Integer.parseInt(req.getParameter("master"))
                             ));
-                            resp.sendRedirect("/admin/requests/" + reqID);
+                            resp.sendRedirect(req.getContextPath() + "/admin/requests/" + reqID);
                             return;
                         } else {
                             throw new WebException(405, "The request method POST is inappropriate for the URL: " + path);
@@ -155,7 +155,7 @@ public class AdminServlet extends HttpServlet {
                                     req.getParameter("description"),
                                     Integer.parseInt(req.getParameter("status"))
                             ));
-                            resp.sendRedirect("/admin/requests/" + reqID);
+                            resp.sendRedirect(req.getContextPath() + "/admin/requests/" + reqID);
                             return;
                         } else {
                             throw new WebException(405, "The request method POST is inappropriate for the URL: " + path);
@@ -173,6 +173,7 @@ public class AdminServlet extends HttpServlet {
             req.getRequestDispatcher("/master-page/" + e.getCode() + ".jsp").forward(req, resp);
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            req.getRequestDispatcher("/admin-page/404.jsp").forward(req, resp);
         }
 
         super.doPost(req, resp);

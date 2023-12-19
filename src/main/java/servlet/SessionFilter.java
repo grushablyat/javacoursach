@@ -15,11 +15,11 @@ public class SessionFilter implements Filter {
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
         String path = req.getRequestURI();
 
-        if ("/login".equals(path)
-                || "/signup".equals(path)
-                || "/logout".equals(path)
-                || (path.startsWith("/styles/") && path.endsWith(".css"))
-                || (path.startsWith("/images/") && (path.endsWith(".png") || path.endsWith(".jpg")))
+        if ((req.getContextPath() + "/login").equals(path)
+                || (req.getContextPath() + "/signup").equals(path)
+                || (req.getContextPath() + "/logout").equals(path)
+                || (path.startsWith(req.getContextPath() + "/styles/") && path.endsWith(".css"))
+                || (path.startsWith(req.getContextPath() + "/images/") && (path.endsWith(".png") || path.endsWith(".jpg")))
         ) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
@@ -30,32 +30,33 @@ public class SessionFilter implements Filter {
                 || session.getAttribute("id") == null
                 || session.getAttribute("role") == null
         ) {
-            resp.sendRedirect("/login");
+            var text = req.getContextPath();
+            resp.sendRedirect(req.getContextPath() + "/login");
             return;
         }
 
         switch ((int) session.getAttribute("role")) {
             case 1 -> {
-                if (!path.startsWith("/admin")) {
-                    req.getRequestDispatcher("/admin-page/404.jsp").forward(req, resp);
+                if (!path.startsWith(req.getContextPath() + "/admin")) {
+                    req.getRequestDispatcher(req.getContextPath() + "/admin-page/404.jsp").forward(req, resp);
                     return;
                 }
             }
             case 2 -> {
-                if (!path.startsWith("/master")) {
-                    req.getRequestDispatcher("/master-page/404.jsp").forward(req, resp);
+                if (!path.startsWith(req.getContextPath() + "/master")) {
+                    req.getRequestDispatcher(req.getContextPath() + "/master-page/404.jsp").forward(req, resp);
                     return;
                 }
             }
             case 3 -> {
-                if (!path.startsWith("/client")) {
-                    req.getRequestDispatcher("/client-page/404.jsp").forward(req, resp);
+                if (!path.startsWith(req.getContextPath() + "/client")) {
+                    req.getRequestDispatcher(req.getContextPath() + "/client-page/404.jsp").forward(req, resp);
                     return;
                 }
             }
             default -> {
                 // Is it an available option?
-                resp.sendRedirect("/logout");
+                resp.sendRedirect(req.getContextPath() + "/logout");
                 return;
             }
         }

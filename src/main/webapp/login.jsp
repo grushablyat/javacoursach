@@ -28,7 +28,7 @@
     <input type="submit" name="loginButton" value="Log In">
 
     <span class="logged-or-not">Do not have an</span>
-    <span class="logged-or-not" style="margin-top: 3px;">account yet? <a href="/signup">Sign Up</a>!</span>
+    <span class="logged-or-not" style="margin-top: 3px;">account yet? <a href="${pageContext.request.contextPath}/signup">Sign Up</a>!</span>
 </form>
 </body>
 </html>

@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/styles/style.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
     <title>Home</title>
 </head>
 <body>
 <header>
     <div class="logolist">
-        <img class="logo" src="/images/whitelogo.jpg">
+        <img class="logo" src="${pageContext.request.contextPath}/images/whitelogo.jpg">
         <nav>
             <ul>
-                <li><a href="/admin">Home</a></li>
-                <li><a href="/admin/users">Users</a></li>
-                <li><a href="/admin/requests">Requests</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin">Home</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/users">Users</a></li>
+                <li><a href="${pageContext.request.contextPath}/admin/requests">Requests</a></li>
             </ul>
         </nav>
     </div>
-    <a href="/logout"><img class="logout" src="/images/logout.png" alt="Log Out"></a>
+    <a href="${pageContext.request.contextPath}/logout">
+        <img class="logout" src="${pageContext.request.contextPath}/images/logout.png" alt="Log Out">
+    </a>
 </header>
 
 <div id="content">

@@ -69,10 +69,10 @@ public class SignupServlet extends HttpServlet {
                 req.getSession().setAttribute("id", user.getId());
                 req.getSession().setAttribute("role", user.getRole());
                 resp.sendRedirect(switch (user.getRole()) {
-                    case 1 -> "/admin";
-                    case 2 -> "/master";
-                    case 3 -> "/client";
-                    default -> "/logout";
+                    case 1 -> req.getContextPath() + "/admin";
+                    case 2 -> req.getContextPath() + "/master";
+                    case 3 -> req.getContextPath() + "/client";
+                    default -> req.getContextPath() + "/logout";
                 });
                 return;
             } else {

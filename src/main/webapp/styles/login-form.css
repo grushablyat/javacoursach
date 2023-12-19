@@ -135,5 +135,6 @@ input[type=submit] {
 .logged-or-not {
     display: block;
     margin: 20px auto 0 auto;
-    color : black;
+    font-size: 14px;
+    color: black;
 }

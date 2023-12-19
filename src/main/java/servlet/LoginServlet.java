@@ -53,10 +53,10 @@ public class LoginServlet extends HttpServlet {
             int role = user.getRole();
             session.setAttribute("role", role);
             resp.sendRedirect(switch (role) {
-                case 1 -> "/admin";
-                case 2 -> "/master";
-                case 3 -> "/client";
-                default -> "/logout";
+                case 1 -> req.getContextPath() + "/admin";
+                case 2 -> req.getContextPath() + "/master";
+                case 3 -> req.getContextPath() + "/client";
+                default -> req.getContextPath() + "/logout";
             });
         } else {
             req.setAttribute("logInResult", "Incorrect username or password");
