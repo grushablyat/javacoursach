@@ -1,8 +1,8 @@
-package model;
+package model.client;
 
 import java.sql.Date;
 
-public class RequestExtended {
+public class Request {
     private int id;
     private int client;
     private Date date;
@@ -12,19 +12,19 @@ public class RequestExtended {
 
     private String clientName;
 
-    public RequestExtended(int client, String description) {
+    public Request(int client, String description) {
         this.client = client;
         this.description = description;
     }
 
-    public RequestExtended(int id, Date date, String description, String statusName) {
+    public Request(int id, Date date, String description, String statusName) {
         this.id = id;
         this.date = date;
         this.description = description;
         this.statusName = statusName;
     }
 
-    public RequestExtended(int id, int client, Date date, String description, int status, String statusName, String clientName) {
+    public Request(int id, int client, Date date, String description, int status, String statusName, String clientName) {
         this(client, description);
         this.id = id;
         this.date = date;

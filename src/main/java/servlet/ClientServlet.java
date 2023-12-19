@@ -35,7 +35,7 @@ public class ClientServlet extends HttpServlet {
                 if ("requests".equals(pathList[1])) {
                     switch (pathList.length) {
                         case 2 -> {
-                            List<RequestExtended> requests = rdbs.getByClient(clientID);
+                            List<model.client.Request> requests = rdbs.getByClient(clientID);
                             if (requests != null) {
                                 req.setAttribute("requests", requests);
                             }
@@ -47,7 +47,7 @@ public class ClientServlet extends HttpServlet {
                                 req.getRequestDispatcher("/client-page/addRequest.jsp").forward(req, resp);
                             } else {
                                 int reqID = Integer.parseInt(requestID);
-                                RequestExtended request = rdbs.getForClientByID(reqID);
+                                model.client.Request request = rdbs.getForClientByID(reqID);
                                 if (request == null || request.getClient() != clientID) {
                                     throw new WebException(403, "Client is not the owner of this request");
                                 }
@@ -60,7 +60,7 @@ public class ClientServlet extends HttpServlet {
                         case 4 -> {
                             int reqID = Integer.parseInt(pathList[2]);
                             int servID = Integer.parseInt(pathList[3]);
-                            RequestExtended request = rdbs.getForClientByID(reqID);
+                            model.client.Request request = rdbs.getForClientByID(reqID);
                             if (request == null || request.getClient() != clientID) {
                                 throw new WebException(403, "Client is not the owner of this request");
                             }
@@ -107,7 +107,7 @@ public class ClientServlet extends HttpServlet {
                     && pathList.length == 3
                     && "new".equals(pathList[2])) {
                 if (req.getParameter("add") != null) {
-                    new RequestDBService().create(new Request(
+                    new RequestDBService().create(new model.Request(
                             (int) req.getSession().getAttribute("id"),
                             req.getParameter("description")
                     ));

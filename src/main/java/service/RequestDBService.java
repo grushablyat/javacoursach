@@ -1,7 +1,6 @@
 package service;
 
 import model.Request;
-import model.RequestExtended;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -32,8 +31,8 @@ public class RequestDBService {
         return requests;
     }
 
-    public List<RequestExtended> getAllExtended() {
-        List<RequestExtended> requests = new ArrayList<>();
+    public List<model.client.Request> getAllExtended() {
+        List<model.client.Request> requests = new ArrayList<>();
 
         try {
             ResultSet rs = dbs.select(
@@ -42,7 +41,7 @@ public class RequestDBService {
                             "JOIN status s ON r.status=s.id " +
                             "JOIN users u ON r.client=u.id");
             while (rs.next()) {
-                requests.add(new RequestExtended(
+                requests.add(new model.client.Request(
                         rs.getInt("id"),
                         rs.getInt("client"),
                         rs.getDate("request_date"),
@@ -59,8 +58,8 @@ public class RequestDBService {
         return requests;
     }
 
-    public List<RequestExtended> getByClient(int client) {
-        List<RequestExtended> requests = new ArrayList<>();
+    public List<model.client.Request> getByClient(int client) {
+        List<model.client.Request> requests = new ArrayList<>();
 
         try {
             ResultSet rs = dbs.select(
@@ -69,7 +68,7 @@ public class RequestDBService {
                             "JOIN status s ON r.status=s.id " +
                             "WHERE r.client=" + client);
             while (rs.next()) {
-                requests.add(new RequestExtended(
+                requests.add(new model.client.Request(
                         rs.getInt("id"),
                         rs.getDate("request_date"),
                         rs.getString("description"),
@@ -104,8 +103,8 @@ public class RequestDBService {
         return request;
     }
 
-    public RequestExtended getForClientByID(int id) {
-        RequestExtended request = null;
+    public model.client.Request getForClientByID(int id) {
+        model.client.Request request = null;
 
         try {
             ResultSet rs = dbs.select(
@@ -115,7 +114,7 @@ public class RequestDBService {
                             "JOIN users u ON r.client=u.id " +
                             "WHERE r.id=" + id);
             if (rs.next()) {
-                request = new RequestExtended(
+                request = new model.client.Request(
                         rs.getInt("id"),
                         rs.getInt("client"),
                         rs.getDate("request_date"),

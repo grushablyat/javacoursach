@@ -1,7 +1,6 @@
 package servlet;
 
 import exception.WebException;
-import jdk.swing.interop.SwingInterOpUtils;
 import model.*;
 import service.CommentDBService;
 import service.RequestDBService;
@@ -41,7 +40,7 @@ public class AdminServlet extends HttpServlet {
                         switch (pathList.length) {
                             // requests
                             case 2 -> {
-                                List<RequestExtended> requests = new RequestDBService().getAllExtended();
+                                List<model.client.Request> requests = new RequestDBService().getAllExtended();
                                 if (requests != null) {
                                     req.setAttribute("requests", requests);
                                 }
@@ -50,7 +49,7 @@ public class AdminServlet extends HttpServlet {
                             // request-services
                             case 3 -> {
                                 int reqID = Integer.parseInt(pathList[2]);
-                                RequestExtended request = new RequestDBService().getForClientByID(reqID);
+                                model.client.Request request = new RequestDBService().getForClientByID(reqID);
                                 if (request == null) {
                                     throw new WebException(403, "Problem with getting request from DB");
                                 }
@@ -68,12 +67,12 @@ public class AdminServlet extends HttpServlet {
                                     req.setAttribute("masters", masters);
                                     req.getRequestDispatcher("/admin-page/addService.jsp").forward(req, resp);
                                 } else if ("edit".equals(pathList[3])) {
-                                    Request request = new RequestDBService().getByID(reqID);
+                                    model.Request request = new RequestDBService().getByID(reqID);
                                     req.setAttribute("request", request);
                                     req.getRequestDispatcher("/admin-page/editRequest.jsp").forward(req, resp);
                                 } else {
                                     int servID = Integer.parseInt(pathList[3]);
-                                    RequestExtended request = new RequestDBService().getForClientByID(reqID);
+                                    model.client.Request request = new RequestDBService().getForClientByID(reqID);
                                     if (request == null) {
                                         throw new WebException(403, "Problem with getting request from DB");
                                     }
@@ -148,7 +147,7 @@ public class AdminServlet extends HttpServlet {
                     case "edit" -> {
                         if (req.getParameter("edit") != null) {
                             int reqID = Integer.parseInt(pathList[2]);
-                            new RequestDBService().edit(reqID, new Request(
+                            new RequestDBService().edit(reqID, new model.Request(
                                     reqID,
                                     Integer.parseInt(req.getParameter("client")),
                                     Date.valueOf(req.getParameter("date")),
