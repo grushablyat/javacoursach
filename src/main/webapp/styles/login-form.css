@@ -62,8 +62,8 @@ body {
                 #40008f,
                 #6336b6
         );
-        left: -30px;
-        bottom: -120px;
+        left: 20px;
+        bottom: -150px;
     }
 }
 
@@ -137,4 +137,8 @@ input[type=submit] {
     margin: 20px auto 0 auto;
     font-size: 14px;
     color: black;
+
+    &.right {
+        text-align: right;
+    }
 }

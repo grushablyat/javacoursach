@@ -55,8 +55,8 @@
 
     <input type="submit" name="signupButton" value="Sign Up">
 
-    <span class="logged-or-not">Already have an</span>
-    <span class="logged-or-not" style="margin-top: 3px;">account? <a href="${pageContext.request.contextPath}/login">Log In</a>!</span>
+    <span class="logged-or-not right">Already have an</span>
+    <span class="logged-or-not right" style="margin-top: 3px;">account? <a href="${pageContext.request.contextPath}/login">Log In</a>!</span>
 </form>
 </body>
 </html>
