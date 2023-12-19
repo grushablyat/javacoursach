@@ -25,21 +25,21 @@
 <div id="content">
     <h1 class="retroshadow">Welcome, ${master.getLogin()}!</h1>
     <p>You can view your services and add comments here.</p>
-    <table>
+    <table class="profile">
         <tr>
-            <th>Name</th>
+            <td>Name</td>
             <td>${master.getName()}</td>
         </tr>
         <tr>
-            <th>E-mail</th>
+            <td>E-mail</td>
             <td>${master.getEmail()}</td>
         </tr>
         <tr>
-            <th>Login</th>
+            <td>Login</td>
             <td>${master.getLogin()}</td>
         </tr>
         <tr>
-            <th>Role</th>
+            <td>Role</td>
             <td>Master</td>
         </tr>
     </table>

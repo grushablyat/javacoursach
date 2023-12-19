@@ -25,21 +25,21 @@
 <div id="content">
     <h1 class="retroshadow">Welcome, ${client.getLogin()}!</h1>
     <p>You can create a request for tech-support or check the status of existing one.</p>
-    <table>
+    <table class="profile">
         <tr>
-            <th>Name</th>
+            <td>Name</td>
             <td>${client.getName()}</td>
         </tr>
         <tr>
-            <th>E-mail</th>
+            <td>E-mail</td>
             <td>${client.getEmail()}</td>
         </tr>
         <tr>
-            <th>Login</th>
+            <td>Login</td>
             <td>${client.getLogin()}</td>
         </tr>
         <tr>
-            <th>Role</th>
+            <td>Role</td>
             <td>Client</td>
         </tr>
     </table>

@@ -26,21 +26,21 @@
 <div id="content">
     <h1 class="retroshadow">Welcome, ${admin.getLogin()}!</h1>
     <p>You can create manipulate requests and services here.</p>
-    <table>
+    <table class="profile">
         <tr>
-            <th>Name</th>
+            <td>Name</td>
             <td>${admin.getName()}</td>
         </tr>
         <tr>
-            <th>E-mail</th>
+            <td>E-mail</td>
             <td>${admin.getEmail()}</td>
         </tr>
         <tr>
-            <th>Login</th>
+            <td>Login</td>
             <td>${admin.getLogin()}</td>
         </tr>
         <tr>
-            <th>Role</th>
+            <td>Role</td>
             <td>Admin</td>
         </tr>
     </table>

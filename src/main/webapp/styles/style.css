@@ -170,3 +170,26 @@ tr.record {
 .recordTable tbody tr:last-of-type {
     border-bottom: 2px solid #892bcb;
 }
+
+/* ------------------------------- Profile ------------------------------- */
+
+.profile {
+    margin: 70px auto 20px auto;
+    border: none;
+}
+.profile td {
+    text-align: left;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    vertical-align: top;
+}
+.profile tr:nth-child(odd){
+    background: #a56aff42;
+}
+.profile tr td:first-child {
+    border-radius: 8px 0 0 8px;
+}
+.profile tr td:last-child {
+    border-radius: 0 8px 8px 0;
+}
