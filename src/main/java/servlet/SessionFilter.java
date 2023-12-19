@@ -54,8 +54,8 @@ public class SessionFilter implements Filter {
                 }
             }
             default -> {
-                // Is it available option?
-                req.getRequestDispatcher("/404.jsp").forward(req, resp);
+                // Is it an available option?
+                resp.sendRedirect("/login");
                 return;
             }
         }

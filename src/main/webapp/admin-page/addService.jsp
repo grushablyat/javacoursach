@@ -24,7 +24,7 @@
 
 <div>
     <form method="post">
-        <p>You can add request here</p>
+        <p>You can add service here</p>
         <table>
             <tr>
                 <td>Description</td>

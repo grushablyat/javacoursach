@@ -39,13 +39,13 @@ public class UserServlet extends HttpServlet {
                             req.setAttribute("user", user);
                             req.getRequestDispatcher("/deprecated/user/editUser.jsp").forward(req, resp);
                         } else {
-                            req.getRequestDispatcher("/404.jsp").forward(req, resp);
+                            req.getRequestDispatcher("/deprecated/404.jsp").forward(req, resp);
                             return;
                         }
                     }
                 }
             } catch (Exception e) { // NumberFormatException
-                req.getRequestDispatcher("/404.jsp").forward(req, resp);
+                req.getRequestDispatcher("/deprecated/404.jsp").forward(req, resp);
                 return;
             }
         }

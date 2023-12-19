@@ -39,13 +39,13 @@ public class RequestServlet extends HttpServlet {
                             req.setAttribute("request", request);
                             req.getRequestDispatcher("/deprecated/request/editRequest.jsp").forward(req, resp);
                         } else {
-                            req.getRequestDispatcher("/404.jsp").forward(req, resp);
+                            req.getRequestDispatcher("/deprecated/404.jsp").forward(req, resp);
                             return;
                         }
                     }
                 }
             } catch (Exception e) { // NumberFormatException
-                req.getRequestDispatcher("/404.jsp").forward(req, resp);
+                req.getRequestDispatcher("/deprecated/404.jsp").forward(req, resp);
                 return;
             }
         }

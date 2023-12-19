@@ -7,7 +7,7 @@ http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
 
     <error-page>
         <error-code>404</error-code>
-        <location>/404.jsp</location>
+        <location>/deprecated/404.jsp</location>
     </error-page>
 
 </web-app>
