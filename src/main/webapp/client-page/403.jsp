@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/style.css">
     <title>Not found</title>
 </head>
-<body>
+<body class="error">
 <header>
     <div class="logolist">
         <img class="logo" src="${pageContext.request.contextPath}/images/whitelogo.jpg">

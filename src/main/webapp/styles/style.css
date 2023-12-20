@@ -8,6 +8,10 @@ body {
     padding: 30px;
 }
 
+body.error {
+    height: 80vh;
+}
+
 header img {
     &.logo {
         height: 80px;
