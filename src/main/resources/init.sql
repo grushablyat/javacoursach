@@ -63,33 +63,32 @@ INSERT INTO role(name) VALUES
 ('Client');
 
 INSERT INTO users(name, email, login, password, role) VALUES
-('Grusha Grusha', 'grushablsja@email.com', 'grushav', 'aded4c27d439580a396842e466e7716e2a655a6c9ee745bfc414b40cae91cb84', 1),
-('Sergej Baranov', 'baranov.43@gmail.com', 'sergge43', 'df1d4b95e3a1695598563d1a5372a166e5d56370abbee6d15c7681745e67fc58', 2),
-('Daria Tarasova', 'tarasova.alien@yandex.ru', 'cornstar', '9b854b069aee5852c9c396667bf119d94ce61103ed373cd70360c66d02e41391', 3),
-('Semen Smirnov', 'semen.smi@gmail.com', 'semen300', '88026fb4001e0be84e231f9e2612d117a2f148c7ba16fdb1da34e11b4802453a', 2),
-('Ilia Steinberg', 'ilia.stein@gmail.com', 'ilusha', '7549aaf0082b79a6f1eb694ebc494b95be06b57753358b302b208daf94f23532', 3),
-('Test Admin', 'admin@admin.org', 'admin', '6b5856cdc03e4b4fd67c58053b50b0c5f01cac7d3f796f8c2d38aa23c9c601ea', 1),
-('Test Master', 'master@master.org', 'master', '220a8149ca4581626893cdec7b04190c5c100a5d979c5e7f35021d33e1153df9', 2),
-('Test Client', 'client@client.org', 'client', 'c685670a70d4af976c9507f0686683657ac402705519cb7efd04ef49be2c3599', 3);
+('Grigorij Tselousov', 'grusha@email.com', 'grushav', '6b5856cdc03e4b4fd67c58053b50b0c5f01cac7d3f796f8c2d38aa23c9c601ea', 1),
+('Sergej Baranov', 'baranov.43@gmail.com', 'sergge43', '220a8149ca4581626893cdec7b04190c5c100a5d979c5e7f35021d33e1153df9', 2),
+('Daria Tarasova', 'tarasova.alien@yandex.ru', 'cornstar', 'c685670a70d4af976c9507f0686683657ac402705519cb7efd04ef49be2c3599', 3),
+('Semen Smirnov', 'semen.smi@gmail.com', 'semen300', '220a8149ca4581626893cdec7b04190c5c100a5d979c5e7f35021d33e1153df9', 2),
+('Ilia Steinberg', 'ilia.stein@gmail.com', 'ilusha', 'c685670a70d4af976c9507f0686683657ac402705519cb7efd04ef49be2c3599', 3);
 
-INSERT INTO request(client, description, status) VALUES
-(3, 'u menya vse slomalos, pamagiti', 3),
-(5, 'set router', 2),
-(3, 'computer crushed', 1),
-(5, 'test request', 1),
-(8, 'test req 1', 1),
-(8, 'test req 2', 1),
-(8, 'help me please, i do no wo to do', 1);
+INSERT INTO request(client, description, status, request_date) VALUES
+(3, 'u menya vse slomalos, pamagiti', 3, '2023-12-14'),
+(5, 'set up my router', 2, '2023-12-15'),
+(3, 'uronili polku na nout', 2, '2023-12-16'),
+(5, 'computer crushed', 2, '2023-12-17'),
+(3, 'phone drowned', 1, '2023-12-18'),
+(5, 'set up VPN', 1, '2023-12-20');
 
 INSERT INTO service(request, master) VALUES
-(1, 1),
-(2, 2),
-(5, 4),
-(6, 2),
-(6, 4);
+(1, 2),
+(2, 4),
+(3, 2),
+(4, 4),
+(3, 4);
 
-INSERT INTO comments(service, text) VALUES
-(1, 'vse pochinili, zaebumba'),
-(2, 'nifiga ne poluchilos'),
-(4, 'delau, no poka slozhno');
+INSERT INTO comments(service, text, comment_date) VALUES
+(1, 'vse pochinil', '2023-12-15'),
+(2, 'Patch cord RJ-45 bought', '2023-12-15'),
+(3, 'Need to change matrix', '2023-12-16'),
+(4, 'Motherboard burned', '2023-12-17'),
+(3, 'Matrix changed, new touchpad and keyboard required', '2023-12-18'),
+(5, 'New touchpad set', '2023-12-19');
 
